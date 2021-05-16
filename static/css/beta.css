@@ -1,0 +1,7 @@
+.beta {
+    border-radius: 5px;
+    border: 1px solid var(--gray-color);
+    position: relative;
+    background: var(--bg-primary);
+    padding: 1rem 1.25rem;
+}

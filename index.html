@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+<head>
+	
+	<style id="nanobarcss" type="text/css">
+	      .nanobar{width:100%;height:4px;top:0}.bar{width:0;height:100%;transition:height .3s;background:#000}
+	</style>
+	<link href="https://fonts.gstatic.com/" rel="preconnect">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<link href="https://flexpool.io/" rel="home">
+	<meta content="utf-8" name="charset">
+	<meta content="width=device-width,initial-scale=1" name="viewport">
+	<meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." name="description">
+	<meta content="ethereum mining pool,flexpool,best ethereum mining pool,fastest ethereum mining pool,ethereum pool" name="keywords">
+	<meta content="general" name="rating">
+	<meta content="all" name="robots">
+	<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="googlebot">
+	<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="bingbot">
+	<meta content="flexpool" name="apple-mobile-web-app-title">
+	<meta content="flexpool" name="application-name">
+	<meta content="#2d89ef" name="msapplication-TileColor">
+	<meta content="#ffffff" name="theme-color">
+	<meta content="summary" name="twitter:card">
+	<meta content="@flexpool_io" name="twitter:site">
+	<meta content="0xC8366…11E36 - Flexpool" name="twitter:title">
+	<meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." name="twitter:description">
+	<meta content="@flexpool_io" name="twitter:creator">
+	<meta content="/static/assets/flexpool-large.png" name="twitter:image">
+	<meta content="0xC8366…11E36" property="og:title">
+	<meta content="en_US" property="og:locale">
+	<meta content="website" property="og:type">
+	<meta content="https://flexpool.io/" property="og:url">
+	<meta content="/static/assets/flexpool-large.png" property="og:image">
+	<meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." property="og:description">
+	<meta content="Flexpool" property="og:site_name">
+	<meta content="0xC8366…11E36" itemprop="name">
+	<meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." itemprop="description">
+	<meta content="https://flexpool.io/apple-touch-icon.png" itemprop="image">
+	<script>
+	      function detectAndApplyColorScheme(){var e="light";if(localStorage.getItem("theme"))"dark"==localStorage.getItem("theme")&&(e="dark");else{if(!window.matchMedia)return!1;window.matchMedia("(prefers-color-scheme: dark)").matches&&(e="dark")}document.documentElement.setAttribute("data-theme",e)}detectAndApplyColorScheme()
+	</script>
+	<link href="/static/css/pool-stats.css" rel="stylesheet">
+	<link href="/static/css/block-stats.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/footer.css" rel="stylesheet">
+	<link href="/ru/wallet" hreflang="ru" rel="alternate">
+	<link href="/es/wallet" hreflang="es" rel="alternate">
+	<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+	<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+	<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+	<link href="/manifest.json" rel="manifest">
+	<link href="/safari-pinned-tab.svg" rel="mask-icon">
+	<link href="/static/css/pagination.css" rel="stylesheet">
+	<link href="/static/css/tables.css" rel="stylesheet">
+	<link href="/static/css/account.css" rel="stylesheet">
+	<link href="/static/css/tooltip.css" rel="stylesheet">
+	<link href="/static/css/scrollbar.css" rel="stylesheet">
+	<link href="/static/css/glowtext.css" rel="stylesheet">
+	<link href="/static/css/classWindows.css" rel="stylesheet">
+	<script src="/static/historicData/lastBlocks.js"></script>
+	<script src="/static/historicData/poolServers.js"></script>
+	<script src="/static/scripts/jquery-3.4.1.min.js"></script>
+	<script src="assets/lib/base-64/base64.js" type="text/javascript"></script>
+	<script src="assets/lib/larder/larder.js" type="text/javascript"></script>
+	<script src="assets/lib/gitters/gitters.js" type="text/javascript"></script>
+	<script>
+	      var redirect = location.href
+	</script>
+	<script src="ghspa.js" type="text/javascript">
+	</script>
+	<title>Flexpool</title>
+</head>
+<body>
+	<div id="extraImage"></div>
+	
+	<script src="../ghspa.js" type="text/javascript">
+	</script>
+	<main style="margin-top: 0px;overflow-x: hidden;">
+		<input id="wallet-textarea-for-copy" style="display:none" value="">
+		<div class="account beta" style="margin: 0px; padding-bottom: 0px;">
+			<div class="account-stats">
+				<div class="wallet">
+					<div class="address">
+						<div class="fordesktop" contenteditable="false" id="fordesktopWallet" onclick="{ $('#fordesktopWallet').prop('contenteditable','true'); var div = document.getElementById('fordesktopWallet'); setTimeout(function() { div.focus(); document.execCommand('selectAll',false,null); }, 0); $('#submitNewWallet').show() var input = document.getElementById('fordesktopWallet'); }" style="font-size: 28px;"></div>
+						<div class="formobile" id="formobileWallet" style="font-size: 0.5em;"></div>
+					</div>
+					<div class="copy-address-wrapper">
+						<div class="tooltip copy-tooltip arrow-top">
+							Copy address
+						</div>
+						<div class="account-copy hover-tooltip">
+							<svg height="512pt" viewbox="-21 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+							<path d="m325.332031 512h-266.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-288c0-32.363281 26.304688-58.664062 58.667969-58.664062h10.664062c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16h-10.664062c-14.699219 0-26.667969 11.964843-26.667969 26.664062v288c0 14.699219 11.96875 26.667969 26.667969 26.667969h266.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-10.664062c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v10.664062c0 32.363281-26.304688 58.667969-58.667969 58.667969zm0 0"></path>
+							<path d="m410.667969 384h-224c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-266.664062c0-32.363281 26.304688-58.667969 58.667969-58.667969h224c32.363281 0 58.664062 26.304688 58.664062 58.667969v266.664062c0 32.363281-26.300781 58.667969-58.664062 58.667969zm-224-352c-14.699219 0-26.667969 11.96875-26.667969 26.667969v266.664062c0 14.699219 11.96875 26.667969 26.667969 26.667969h224c14.699219 0 26.664062-11.96875 26.664062-26.667969v-266.664062c0-14.699219-11.964843-26.667969-26.664062-26.667969zm0 0"></path></svg>
+						</div>
+						<div class="fordesktop" id="submitNewWallet" onclick="{ window.location.href=window.location.href.replace(window.wallet,$('#fordesktopWallet').text()) }" style="position: absolute;top: 34px;font-size: 12px;background-color: #333;width: 80px;height: 40px;margin-left: -30px;justify-content: center;align-items: center;border-radius: 6px;border: 1px solid transparent;transition: .1s;cursor: pointer;text-align: center;display: none;">
+							<div style="padding-top: 6px;">
+								Submit<br>
+								new wallet
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="account-info">
+					<div class="info-card" style="margin-top: -8px;">
+						Rank: <mark><span class="account-rank" style="font-size: 24px; color: white;"><span class="blank-element" style="display:inline-block;width:50px;"></span></span></mark>
+					</div>
+					<div class="info-card">
+						Min. Payout: <span class="min-payout-threshold"><span class="blank-element" style="display:inline-block;width:40px"></span></span>
+					</div>
+					<div class="info-card">
+						Pool Donation: <span class="pool-donation"><span class="blank-element" style="display:inline-block;width:40px"></span></span>
+					</div>
+					<div class="fordesktop" id="donateTabToggle" style=" padding: 2px; color: black; background-color: var(--accent-color); color: var(--text-color); margin: 1px; border-radius: 4px; cursor: pointer; margin-bottom: 4px;">
+						Donate to Tiago ?
+					</div>
+					<div class="fordesktop" id="themesTabToggle" style="display: none; padding: 2px; color: black; background-color: var(--accent-color); color: var(--text-color); margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px;">
+						Themes
+					</div>
+					<select id="themeSelect" onchange="
+let themeSelected=$('#themeSelect option:selected').val()
+if (themeSelected=='togglewidth')
+{
+ if ($('main').css('max-width')=='980px')
+ {
+ $('main').css('max-width','98%');
+ //$('main').css('margin','0');
+ $('main').css('margin-top','0');
+ }
+ else
+ {
+ $('main').css('max-width','971px');
+ $('main').css('margin','140px auto 0');
+ $('main').css('margin-top','0');
+ }
+ $('#refreshData').click();
+}
+else if (themeSelected=='mixthemes')
+{
+ if (mixThemes==undefined || mixThemes==0)
+  mixThemes=1;
+ else
+  mixThemes=0;
+}
+else
+{
+ clearAnApplyTheme(themeSelected);
+}" style="background: black;border-color: var(--accent-color);border-width: 2px;background-color: var(--accent-color);color: var(--text-color);margin: 1px;border-radius: 4px;cursor: pointer;margin-left: 6px;margin-bottom: 4px;
+    max-width: 100px;
+    font-size: 14px;" class="fordesktop">
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+					<option value="chocolate">Chocolate</option>
+					<option value="chocolate2">Chocolate II: Electric Bugaloo</option>
+					<option value="gb">GB</option>
+					<option value="thudder">Thudder</option>
+					<option value="doge">Doge</option>
+					<option value="boomer">Boomer</option>
+					<option value="elon">Elon</option>
+					<option value="elon2">Elon 2</option>
+<option value="teameurope">Europe</option>
+<option value="teameurope2">Europe 2</option>
+<option value="beta">Beta?</option>
+<option value="spacecat">Space Cat</option>
+<option value="darkmario">Dark Mario</option>
+<option value="mixthemes">Mix Themes</option>
+<option value="togglewidth">Toggle Width</option>
+				</select>
+
+				</div>
+			</div>
+			<div class="settings">
+				<div class="btn formobile" onclick="$('#donateWindow').toggle()" style="height: 10px;margin-bottom: 2px;padding: 6px;padding-top: 4px;padding-bottom: 12px;background-color: var(--accent-color);color: var(--text-color);">
+					Donate to Tiago ?
+				</div>
+				<div class="btn formobile" onclick="$('#themeWindow').toggle()" style="height: 10px;margin-bottom: 22px;padding: 6px;padding-top: 4px;padding-bottom: 12px;background-color: var(--accent-color);color: var(--text-color);">
+					Themes
+				</div>
+				<div class="btn" id="autoRefresh" style=" height: 10px; margin-bottom: 2px; padding: 6px; padding-top: 4px; padding-bottom: 12px; margin-top: -20px; background-color: var(--accent-color); color: var(--text-color);">
+					Start Refresh
+				</div>
+				<div class="btn" id="refreshData" style=" height: 10px; padding: 6px; padding-top: 4px; padding-bottom: 12px; background-color: var(--accent-color); color: var(--text-color);">
+					Reload
+				</div>
+			</div>
+		</div>
+		<div class="header-stats" id="themeWindow" style="display: none;margin-top: 20px;">
+			<div class="stat" style="text-align: center;align-items: center;min-height: 40px;margin-bottom: 20px;">
+				<div class="account-info">
+					<div class="info-card" onclick="clearAnApplyTheme('light');" style=" padding: 2px; color: black; background-color: white; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid black;">
+						Light
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('dark');" style=" padding: 2px; color: white; background-color: black; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid gray;">
+						Dark
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('chocolate');" style=" padding: 2px; color: white; background-color: #403B3B; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid black;">
+						Chocolate
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('chocolate2');" style=" padding: 2px; color: white; background-color: #403B3B; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid black;">
+						Chocolate II : Electric Bugaloo
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('gb');" style=" padding: 2px; color: black; background-color: #b20faf; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #403b3b;">
+						GB
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('thudder');" style=" padding: 2px; color: #9b57a7; background-color: black; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #9b57a7;">
+						Thudder
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('doge');" style=" padding: 2px; color: #cb9800; background-color: #3e2d20; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #cb9800;">
+						Doge
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('boomer');" style=" padding: 2px; color: #cc0100; background-color: black; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #cc0100;">
+						Boomer
+					</div>
+				</div>
+				<div class="account-info">
+					<div class="info-card" onclick="clearAnApplyTheme('elon');" style=" padding: 2px; color: #7f342a; background-color: #c4baae; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #af7c61;">
+						Elon
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('elon2');" style=" padding: 2px; color: #7f342a; background-color: #c4baae; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #af7c61;">
+						Elon2
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('teameurope');" style=" padding: 2px; color: #e6e6e6; background-color: #3d417b; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #000000;">
+						Europe
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('teameurope2');" style=" padding: 2px; color: #e6e6e6; background-color: #3d417b; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #000000;">
+						Europe 2
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('beta');" style=" padding: 2px; color: white; background-color: black; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid gray;">
+						Beta?
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('spacecat');" style="padding: 2px;color: #d29a70;background-color: #4f4158;margin: 1px;border-radius: 4px;cursor: pointer;margin-left: 6px;margin-bottom: 4px;border: 2px solid #313131;">
+						Space Cat
+					</div>
+					<div class="info-card" onclick="clearAnApplyTheme('darkmario');" style="padding: 2px;color: #a03125;background-color: #444044;margin: 1px;border-radius: 4px;cursor: pointer;margin-left: 6px;margin-bottom: 4px;border: 2px solid #2b292a;">
+						Dark Mario
+					</div>
+					<div class="info-card" onclick="if (mixThemes==undefined || mixThemes==0) mixThemes=1; else mixThemes=0;" style=" padding: 2px; color: black; background-color: #585050; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid #8e8888;">
+						Mix Themes
+					</div>
+
+					<div class="info-card" onclick="
+if ($('main').css('max-width')=='980px')
+{
+$('main').css('max-width','98%');
+//$('main').css('margin','0');
+$('main').css('margin-top','0');
+}
+else
+{
+$('main').css('max-width','980px');
+$('main').css('margin','140px auto 0');
+$('main').css('margin-top','0');
+}
+$('#refreshData').click();
+" style=" padding: 2px; color: black; background-color: white; margin: 1px; border-radius: 4px; cursor: pointer; margin-left: 6px; margin-bottom: 4px; border: 2px solid black;">
+						Toggle Width
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="banner"></div>
+		<div class="header-stats" id="donateWindow" style="display: none;margin-top: 20px;">
+			<div class="stat" style="text-align: center;align-items: center;height: 40px;margin-bottom: 20px;">
+				<script src="https://ko-fi.com/widgets/widget_2.js" type="text/javascript">
+				</script> 
+				<script type="text/javascript">
+				                        kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L3L0459K6');kofiwidget2.draw();
+				</script>
+			</div>
+			<div class="stat" style="text-align: center;align-items: center;height: 40px;margin-bottom: 20px;">
+				<div class="gray subbalance" style=" font-family: monospace; font-size: 1.5em; text-overflow: ellipsis; width: 100%;">
+					ETH Wallet: 0xC8366d03F3F88cc0769efDa34B241f4eEDD11E36
+				</div>
+			</div>
+		</div>
+		<div class="header-stats" id="main-header-stats" style="margin-top: 20px;">
+			<div class="stat beta" id="workerWindow" style="text-align: center;align-items: center;">
+				<div class="workerWindowStat sec">
+					Workers Online/Offline
+				</div>
+				<div class="workerWindowStat main high-letter-spacing" id="online-offline-workers">
+					<mark><span class="online-workers">0</span></mark>/<span class="offline-workers">0</span>
+				</div>
+				<div class="workerWindowStat2 sec">
+					Pool Hashrate
+					<div class="main" id="poolHashrate">
+						&nbsp;
+					</div>
+				</div>
+				<div class="workerWindowStat3 sec" style="display: none;">ETH Difficulty<div class="main" id="ethdifficulty">- P</div></div>
+			</div>
+			<div class="stat beta">
+				<div id="countdown" style=" color: #8f9e9e; text-align: center; margin-top: -150px; position: absolute; width: 100%; z-index: 999;"></div>
+				<div class="sec">
+					Unpaid Balance
+				</div>
+				<div class="main">
+					<div class="flexcol" style="width:100%">
+						<div>
+							<span class="balance" id="balance" style="font-family: monospace;"></span>
+							<div class="blank-element">
+								<span class="balance" id="balance" style="font-family: monospace;"></span>
+							</div>
+							<div class="lower">
+								ETH
+							</div>
+							<div class="bulba">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</div>
+						</div>
+						<div class="gray subbalance">
+							<span id="balance-usd" style="margin-left: auto;">0</span>&nbsp;
+							<div class="currencyString">
+								USD
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="unconfirmedBalContainer">
+					<div class="sec" id="unconfirmedBalanceTitle" style="font-size: 12px;">
+						Unconfirmed Balance*
+					</div>
+					<div class="main">
+						<div class="flexcol" style="width:100%;height: 30px;">
+							<div>
+								<span class="balance" id="unconfirmedBalance" style="font-size: 18px;font-family: monospace;">-</span>
+								<div class="lower">
+									ETH
+								</div>
+								<div class="gray subbalance" style="display: contents;width: 100%;">
+									<span id="unconfirmedBalance-usd" style="margin-left: auto;">-</span>&nbsp;
+									<div class="currencyString">
+										USD
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="main" style=" align-self: center; color: gray; margin-top: 6px;">
+					<div class="sec gray" style=" margin-right: 16px;">
+						Gas
+						<div id="currentGasSettings" style=" text-align: center; color: var(--text-color); font-size: 20px;">
+							-
+						</div>
+					</div>
+					<div class="flexcol" style="width:100%;align-self: center;">
+						<div>
+							<span class="balance gray" id="gasPrices" style=" font-size: 24px;">- / - / -</span>
+						</div>
+					</div>
+				</div>
+				<div class="hover-tooltip" id="payout-bar">
+					<div class="gray" id="timeToGetPaid" style="text-align: center;font-size: 14px;color: gray;position: absolute;width: 100%;top: -18px;"></div>
+				</div>
+				<div class="tooltip arrow-top balance-tooltip" id="tooltip-balance-bar" style="visibility: hidden; opacity: 0;"></div>
+			</div>
+			<div class="stat beta">
+				<select id="currencySelect" onchange=" if (location.href != redirect) { window.location.search=(((window.location.search.match(/\?/g) || []).length&lt;1)? window.location.search+'?'+$('#currencySelect option:selected').text(): window.location.search.replace('?'+$('.currencyString').html().toUpperCase(),'?'+$('#currencySelect option:selected').text()).replace('?'+$('.currencyString').html().toLowerCase(),'?'+$('#currencySelect option:selected').text())) } else { window.location.search=(((window.location.search.match(/\?/g) || []).length&lt;2)? window.location.search+'?'+$('#currencySelect option:selected').text(): window.location.search.replace('?'+$('.currencyString').html().toUpperCase(),'?'+$('#currencySelect option:selected').text()).replace('?'+$('.currencyString').html().toLowerCase(),'?'+$('#currencySelect option:selected').text())) }" style=" margin-top: 4px; height: 26px; right: 0px; top: 10px; width: 60px; position: absolute; color: white; background: black; border-radius: 6px; border-color: var(--accent-color); border-width: 2px;">
+					<option value="USD">USD</option>
+					<option value="AUD">AUD</option>
+					<option value="CAD">CAD</option>
+					<option value="EUR">EUR</option>
+					<option value="GBP">GBP</option>
+					<option value="JPY">JPY</option>
+					<option value="MYR">MYR</option>
+					<option value="NZD">NZD</option>
+					<option value="BRL">BRL</option>
+					<option value="BTC">BTC</option>
+				</select>
+				<div class="sec">
+					Next Block Share
+				</div>
+				<div class="main">
+					<div class="flexcol" style="width:100%">
+						<div>
+							<span id="round-share-percent"></span>
+							<div class="blank-element">
+							</div>
+						</div>
+						<div class="gray subbalance">
+							<div style="width: 58px;">
+								Block:&nbsp;
+							</div><span id="approx-next-block-reward" style="margin: auto; font-family: monospace;padding-right: 4px;">0.0000000</span>ETH<span id="approx-next-block-reward-usd" style="margin: auto; font-family: monospace;padding-left: 6px;width: 58px; text-align: end;">0000.00</span>&nbsp;
+							<div class="currencyString">
+								USD
+							</div>
+						</div>
+						<div class="gray subbalance">
+							<div style="width: 58px;">
+								Day:&nbsp;
+							</div><span id="approx-daily-reward" style="margin: auto; font-family: monospace;padding-right: 4px;">0.0000000</span>ETH<span id="approx-daily-reward-usd" style="margin: auto; font-family: monospace;padding-left: 6px;width: 58px; text-align: end;">0000.00</span>&nbsp;
+							<div class="currencyString">
+								USD
+							</div>
+						</div>
+						<div class="gray subbalance">
+							<div style="width: 58px;">
+								7 D.:&nbsp;
+							</div><span id="approx-weekly-reward" style="margin: auto; font-family: monospace;padding-right: 4px;">0.0000000</span>ETH<span id="approx-weekly-reward-usd" style="margin: auto; font-family: monospace;padding-left: 6px;width: 58px; text-align: end;">0000.00</span>&nbsp;
+							<div class="currencyString">
+								USD
+							</div>
+						</div>
+						<div class="gray subbalance">
+							<div style="width: 58px;">
+								30 D.:&nbsp;
+							</div><span id="approx-monthly-reward" style="margin: auto; font-family: monospace;padding-right: 4px;">0.0000000</span>ETH<span id="approx-monthly-reward-usd" style="margin: auto; font-family: monospace;padding-left: 6px;width: 58px; text-align: end;">0000.00</span>&nbsp;
+							<div class="currencyString">
+								USD
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="sec" style="margin-top: 4px;">
+					Current ETH Price
+				</div>
+				<div class="flexcol">
+					<div class="gray subbalance" style="font-weight: bold;font-size: 22px;">
+						<span id="currentETHPrice" style="font-family: monospace;text-align: end;padding-right: 6px;">0</span>
+						<div class="currencyString" style="margin-right: auto;">
+							USD
+						</div>
+					</div>
+				</div>
+				<div class="btn" onclick="$('#topTabs').toggle();$('#topTabsSpace').show();" style=" height: 10px; padding: 6px; padding-top: 4px; padding-bottom: 12px; background-color: var(--accent-color); color: var(--text-color); position: absolute; right: 0px; bottom: 0px; opacity: 0.5;">
+					Hide Tabs
+				</div>
+			</div>
+		</div>
+		<div id="topTabsSpace" style="height:10px; display: none;"></div>
+		<div class="select-dashboard-category" id="topTabs" style="overflow-x: hidden;">
+			<ul class="smartTabUl">
+				<li class="smartTabIl selector" id="general-selector" onclick="switchView(&quot;general&quot;)">General</li>
+				<li class="smartTabIl selector" id="stats-selector" onclick="switchView(&quot;stats&quot;)">Stats</li>
+				<li class="smartTabIl selector" id="rewards-selector" onclick="switchView(&quot;rewards&quot;)">Rewards</li>
+				<li class="smartTabIl selector" id="pool-selector" onclick="switchView(&quot;pool&quot;)">Pool</li>
+				<li class="smartTabIl selector" id="payouts-selector" onclick="switchView(&quot;payouts&quot;)">Payouts</li>
+				<li class="smartTabIl selector" id="showblocks-selector" onclick="switchView(&quot;showblocks&quot;)">Blocks</li>
+			</ul>
+		</div>
+		<div id="general" style="visibility: visible; display: none;">
+			<div class="main-stats-wrapper" style=" margin-top: 0px;">
+				<div class="main-stats beta">
+					<div class="stats-title">
+						Hashrate
+					</div>
+					<div class="wrapper" style=" margin-top: -10px;">
+						<div class="stat">
+							<div class="content" id="effective_hashrate2">
+								<mark class="big">-</mark>
+							</div>
+							<div class="title">
+								Current E.
+							</div>
+						</div>
+						<div class="stat hover-tooltip">
+							<div class="content" id="average_hashrate2">
+								<mark class="big">-</mark>
+							</div>
+							<div class="title">
+								Average E.
+							</div>
+							<div class="tooltip arrow-top">
+								<div>
+									12h Average: <span id="12h-avg-hashrate2">0 MH/s</span>
+								</div>
+								<div>
+									6h Average: <span id="6h-avg-hashrate2">0 MH/s</span>
+								</div>
+							</div>
+						</div>
+						<div class="stat">
+							<div class="content" id="reported_hashrate2">
+								<mark class="big">-</mark>
+							</div>
+							<div class="title">
+								Reported
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="main-stats beta" id="w24hshares" style="">
+					<div class="stats-title">
+						24h Shares
+					</div>
+					<div class="wrapper" style=" margin-top: -10px;">
+						<div class="stat">
+							<div class="content" id="valid_shares2">
+								<mark class="big">-</mark>
+							</div>
+							<div class="title">
+								Valid (<span id="valid_shares_percentage2">-</span>%)
+							</div>
+						</div>
+						<div class="stat">
+							<div class="content" id="stale_shares2">
+								<mark class="big">-</mark>
+							</div>
+							<div class="title">
+								Stale (<span id="stale_shares_percentage2">-</span>%)
+							</div>
+						</div>
+						<div class="stat">
+							<div class="content" id="invalid_shares2">
+								<mark class="big">-</mark>
+							</div>
+							<div class="title">
+								Invalid (<span id="invalid_shares_percentage2">-</span>%)
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header-stats" id="main-header-stats">
+				<div class="stat beta" style="align-items: center;text-align: center;">
+					<div class="sec">
+						Average <mark style="color: var(--accent-color);">Effort</mark>/<mark style="color: var(--luck-color);">Luck</mark> 24h
+						<div class="main" id="avgluck24">
+							<mark class="luck-value" data-luck="">-</mark>&nbsp;
+						</div>
+					</div>
+					<div class="sec">
+						Average <mark style="color: var(--accent-color);">Effort</mark>/<mark style="color: var(--luck-color);">Luck</mark>
+						<div class="main" id="avgluck">
+							<mark class="luck-value" data-luck="">-</mark>&nbsp;
+						</div>
+					</div>
+					<div class="sec">
+						Average Round Time
+						<div class="main" id="avgroundtime">
+							&nbsp;
+						</div>
+					</div>
+					<div class="sec">
+						Current <mark style="color: var(--accent-color);">Effort</mark>/<mark style="color: var(--luck-color);">Luck</mark>
+						<div class="main" id="currentluck">
+							<mark class="luck-value" data-luck="">-</mark>&nbsp;
+						</div>
+					</div>
+				</div>
+				<div class="stat beta">
+					<div class="main" style="display: block;">
+						<div class="sec" style="text-align: center;padding-bottom: 31px;">
+							Pool ETH Mined Last 24h / Today
+							<div class="main" id="minedETH" style="display: block;font-size: 34px;">
+								&nbsp;
+							</div>
+						</div>
+						<div class="sec">
+							Total Paid
+						</div>
+						<div class="flexcol" style="padding-bottom: 5px;">
+							<div>
+								<span class="balance" id="totalPaidBalance" style="font-family: monospace;"></span>
+								<div class="blank-element">
+									<span class="balance" id="totalPaidBalance" style="font-family: monospace;"></span>
+								</div>
+								<div class="lower">
+									ETH
+								</div>
+							</div>
+							<div class="gray subbalance">
+								<span id="totalPaidBalance-usd" style="margin-left: auto;">0</span>&nbsp;
+								<div class="currencyString">
+									USD
+								</div>
+							</div>
+						</div>
+						<div class="sec">
+							Total Paid + Unpaid
+						</div>
+						<div class="flexcol">
+							<div>
+								<span class="balance" id="totalPaidBalanceUnpaid" style="font-family: monospace;"></span>
+								<div class="blank-element">
+									<span class="balance" id="totalPaidBalanceUnpaid" style="font-family: monospace;"></span>
+								</div>
+								<div class="lower">
+									ETH
+								</div>
+							</div>
+							<div class="gray subbalance">
+								<span id="totalPaidBalanceUnpaid-usd" style="margin-left: auto;">0</span>&nbsp;
+								<div class="currencyString">
+									USD
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="stat beta" style="align-items: center;text-align: center;">
+					<div class="sec">
+						Blocks Last 24h / Today (and Uncle)
+						<div class="main" id="blocksLast24" style="display: block;">
+							&nbsp;
+						</div>
+					</div>
+					<div class="sec">
+						Blocks Per Day (Hashrate)
+						<div class="main" id="blocksPerDay" style="display: block;">
+							&nbsp;
+						</div>
+					</div>
+					<div class="sec">
+						Minutes Per Block (Hashrate)
+						<div class="main" id="blocksPerMinute" style="display: block;">
+							&nbsp;
+						</div>
+					</div>
+					<div class="sec">
+						Time Since Last Block
+						<div class="main" id="timeSinceLastBlock" style="display: block;">
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="stats" style="visibility: visible; display: none;">
+			<div id="worker-header">
+				<div class="wrapper">
+					<div class="title">
+						WORKER
+					</div>
+					<div class="name">
+						WORKER_NAME
+					</div>
+				</div>
+				<div class="wrapper">
+					<div class="btn" onclick="renderStats(&quot;&quot;)">
+						Reset
+					</div>
+				</div>
+			</div>
+			<div class="main-stats-wrapper" style="margin-top: 0px;">
+				<div class="main-stats beta">
+					<div class="stats-title">
+						Hashrate <span class="account-help" onclick="goTo(&quot;/docs/FAQ#dashboard-hashrates&quot;)" style="display: none;"><img alt="question mark" class="question-mark"></span>
+					</div>
+					<div class="wrapper" style="margin-top: -10px;">
+						<div class="stat">
+							<div class="content" id="effective_hashrate">
+								<mark class="big">0</mark> H/s
+							</div>
+							<div class="title">
+								Current E.
+							</div>
+						</div>
+						<div class="stat hover-tooltip">
+							<div class="content" id="average_hashrate">
+								<mark class="big">0</mark> H/s
+							</div>
+							<div class="title">
+								Average E.
+							</div>
+							<div class="tooltip arrow-top">
+								<div>
+									12h Average: <span id="12h-avg-hashrate">0 H/s</span>
+								</div>
+								<div>
+									6h Average: <span id="6h-avg-hashrate">0 H/s</span>
+								</div>
+							</div>
+						</div>
+						<div class="stat">
+							<div class="content" id="reported_hashrate">
+								<mark class="big">0</mark> H/s
+							</div>
+							<div class="title">
+								Reported
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="main-stats beta" id="w24hshares2">
+					<div class="stats-title">
+						24h Shares <span class="account-help" onclick="goTo(&quot;/docs/FAQ#dashboard-shares&quot;)" style="display: none;"><img alt="question mark" class="question-mark"></span>
+					</div>
+					<div class="wrapper" style="margin-top: -10px;">
+						<div class="stat">
+							<div class="content" id="valid_shares">
+								<mark class="big">0</mark>
+							</div>
+							<div class="title">
+								Valid (<span id="valid_shares_percentage">0</span>%)
+							</div>
+						</div>
+						<div class="stat">
+							<div class="content" id="stale_shares">
+								<mark class="big">0</mark>
+							</div>
+							<div class="title">
+								Stale (<span id="stale_shares_percentage">0</span>%)
+							</div>
+						</div>
+						<div class="stat">
+							<div class="content" id="invalid_shares">
+								<mark class="big">0</mark>
+							</div>
+							<div class="title">
+								Invalid (<span id="invalid_shares_percentage">0</span>%)
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="chart" id="hashrates-chart"></div>
+			<div class="chart" id="shares-chart"></div>
+			<div class="workerstitle-with-filter mt50 mb20 beta">
+				<h1>Workers</h1>
+				<div class="workers-search">
+					<img alt="Search Icon" id="worker-search-icon"><input id="worker-search" placeholder="Search by name">
+				</div>
+			</div>
+			<div class="table-wrapper beta" id="workers-table">
+				<table id="rigstats">
+					<thead id="rigstats-thead">
+						<tr>
+							<th class="black-underline sorted">Name<img alt="Sort Icon" class="sort-icon-up"></th>
+							<th class="black-underline sorted">Reported<img alt="Sort Icon" class="sort-icon"></th>
+							<th class="black-underline sorted">Effective<img alt="Sort Icon" class="sort-icon"></th>
+							<th class="black-underline sorted">Valid<img alt="Sort Icon" class="sort-icon"></th>
+							<th class="black-underline sorted">Stale<img alt="Sort Icon" class="sort-icon"></th>
+							<th class="black-underline sorted">Invalid<img alt="Sort Icon" class="sort-icon"></th>
+							<th style="width:150px">Last Seen</th>
+						</tr>
+					</thead>
+					<tbody id="rigstats-tbody"></tbody>
+				</table>
+			</div>
+		</div>
+		<div id="rewards" style="visibility: visible; display: none;">
+			<div class="select-dashboard-category" style="overflow: hidden;">
+				<ul class="smartTabUl">
+					<li class="smartTabIl selector selector-selected" id="default-reward-selector" onclick="$(this).addClass('selector-selected');
+$('#api2-reward-selector').removeClass('selector-selected'); render_rewards_chart()">Default</li>
+					<li class="smartTabIl selector" id="api2-reward-selector" onclick="$(this).addClass('selector-selected');
+$('#default-reward-selector').removeClass('selector-selected'); render_rewards_api2_chart()" style="width: 130px;">V2 API Beta</li>
+				</ul>
+			</div>
+			<div class="chart" id="rewards-chart"></div>
+			<div class="simple-wrapper beta">
+				<div class="table-wrapper inline">
+	<table id="rewards-table">
+		<thead>
+			<tr>
+				<th>Number</th>
+				<th>Type</th>
+				<th>Mined on</th>
+				<th>Reward</th>
+				<th>MEV</th>
+				<th>Block%</th>
+				<th>Your.Rew</th>
+				<th>Your.MEV</th>
+			</tr>
+		</thead>
+		<tbody id="rewards-tablebody">
+			
+		</tbody>
+	</table>
+				</div>
+				<div class="pagination-wrapper">
+					<div class="pagination-main">
+						<ul class="pagination" id="rewards-pagination"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="payouts" style="visibility: visible; display: none;">
+			<div class="chart" id="payouts-chart"></div>
+			<div class="header-stats sec-header-stats" style="margin-top:25px">
+				<div class="stat beta">
+					<div class="sec">
+						Total Donated
+					</div>
+					<div class="main">
+						<div class="flexcol">
+							<div>
+								<span class="total-donated">0</span>
+								<div class="lower">
+									ETH
+								</div>
+							</div>
+							<div class="gray subbalance">
+								<span class="total-donated-usd">0</span>&nbsp;
+								<div class="currencyString">
+									USD
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="stat beta">
+					<div class="sec">
+						Total Paid
+					</div>
+					<div class="main">
+						<div class="flexcol">
+							<div>
+								<span class="total-paid">0</span>
+								<div class="lower">
+									ETH
+								</div>
+							</div>
+							<div class="gray subbalance">
+								<span class="total-paid-usd">0</span>&nbsp;
+								<div class="currencyString">
+									USD
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="stat beta">
+					<div class="sec">
+						Total Payouts
+					</div>
+					<div class="main">
+						<div class="flexcol">
+							<div class="total-payouts">
+								0
+							</div>
+						</div>
+						<div class="flexcol">
+							<div class="lower">
+								txns
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1 class="center" style="margin-top:30px;margin-bottom:5px">Transactions</h1>
+			<div style="display:flex;justify-content:flex-end;height:25px">
+				<a class="noglow" href="https://flexpool.io/api/v1/export/miner/wallet/payments.csv" id="aWalletExport"><span class="gray">Export in</span> <b>CSV</b></a>
+			</div>
+			<div class="simple-wrapper beta">
+				<div class="table-wrapper inline">
+					<table id="payments-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Time</th>
+								<th>Amount</th>
+								<th>Duration</th>
+								<th>TxID</th>
+							</tr>
+						</thead>
+						<tbody id="payments-tablebody"></tbody>
+					</table>
+				</div>
+				<div class="pagination-wrapper">
+					<div class="pagination-main">
+						<ul class="pagination" id="payments-pagination"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="pool" style="visibility: visible; display: none;">
+			<div class="poolstat">
+				<div class="simple-wrapper" id="pool-hashrate-chart"></div>
+			</div>
+			<div class="stats mt10 beta">
+				<div class="stat">
+					<div class="main">
+						<mark id="pool-hashrate">-</mark> <span id="pool-hashrate-si"></span>H/s
+					</div>
+					<div class="sec">
+						Pool Hashrate
+					</div>
+				</div>
+				<div class="stat">
+					<div class="main">
+						<mark id="total-miners">-</mark>
+					</div>
+					<div class="sec">
+						Miners Online
+					</div>
+				</div>
+				<div class="stat">
+					<div class="main">
+						<mark id="total-workers">-</mark>
+					</div>
+					<div class="sec">
+						Workers Online
+					</div>
+				</div>
+				<div class="stat">
+					<div class="main" id="avgluck_">
+						-
+					</div>
+					<div class="sec">
+						Average Luck
+					</div>
+				</div>
+			</div>
+			<div class="chart" id="pool-server-mined-chart" style="overflow: hidden;height: 500px;"></div>
+		</div>
+		<div id="showblocks" style="visibility: visible; display: none;">
+			<div class="select-dashboard-category" style="overflow: hidden;">
+				<ul class="smartTabUl">
+					<li class="smartTabIl selector" id="poolblocks-selector" onclick="switchViewBlock(&quot;poolblocks&quot;)">Confirmed</li>
+					<li class="smartTabIl selector" id="uncpoolblocks-selector" onclick="switchViewBlock(&quot;uncpoolblocks&quot;)" style="width: 130px;">Unconfirmed</li>
+					<li class="smartTabIl selector" id="blocks-selector" onclick="switchViewBlock(&quot;blocks&quot;)">Mined</li>
+					<li style="list-style: none; display: inline">
+						<div class="fordesktop">
+							<h1 style=" position: absolute; margin-top: -10px; color: var(--gray-color); margin-left: 20px;"><span id="blocks-mined" style="">-</span> Blocks</h1>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="blocks" style="display: none;" class="beta">
+				<div class="simple-wrapper">
+					<div class="table-wrapper inline">
+						<table id="blocks-table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Time</th>
+									<th>Number</th>
+									<th>Type</th>
+									<th>Reward</th>
+									<th>Hash</th>
+								</tr>
+							</thead>
+							<tbody id="blocks-tablebody"></tbody>
+						</table>
+					</div>
+					<div class="pagination-wrapper">
+						<div class="pagination-main">
+							<ul class="pagination" id="blocks-pagination"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="nostats" style="display: none;text-align: center;">
+				<img alt="No blocks image" src="/static/assets/blocks.svg"><br>
+				<span class="primary">No blocks have been mined so far.</span><span class="secondary"></span>
+			</div>
+			<div id="poolblocks">
+				<div class="simple-wrapper beta">
+					<div class="table-wrapper inline">
+						<table id="poolblocks-table">
+							<thead>
+								<tr>
+									<th>Number</th>
+									<th>Type</th>
+									<th>Mined on</th>
+									<th>Miner</th>
+									<th>Reward</th>
+									<th>Round Time</th>
+									<th>Luck</th>
+								</tr>
+							</thead>
+							<tbody id="poolblocks-tablebody"></tbody>
+						</table>
+					</div>
+					<div class="pagination-wrapper">
+						<div class="pagination-main">
+							<ul class="pagination" id="poolblocks-pagination"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="uncpoolblocks" style="display: none;">
+				<div class="simple-wrapper beta">
+					<div class="table-wrapper inline">
+						<table id="uncpoolblocks-table">
+							<thead>
+								<tr>
+									<th>Number</th>
+									<th>Type</th>
+									<th>Mined on</th>
+									<th>Miner</th>
+									<th>Reward</th>
+									<th>Round Time</th>
+									<th>Luck</th>
+								</tr>
+							</thead>
+							<tbody id="uncpoolblocks-tablebody"></tbody>
+						</table>
+					</div>
+					<div class="pagination-wrapper">
+						<div class="pagination-main">
+							<ul class="pagination" id="uncpoolblocks-pagination"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="select-dashboard-category" style="overflow-x: hidden;">
+			<ul class="smartTabUl">
+				<li class="smartTabIl selector" id="general-selector" onclick="switchView(&quot;general&quot;)">General</li>
+				<li class="smartTabIl selector" id="stats-selector" onclick="switchView(&quot;stats&quot;)">Stats</li>
+				<li class="smartTabIl selector" id="rewards-selector" onclick="switchView(&quot;rewards&quot;)">Rewards</li>
+				<li class="smartTabIl selector" id="pool-selector" onclick="switchView(&quot;pool&quot;)">Pool</li>
+				<li class="smartTabIl selector" id="payouts-selector" onclick="switchView(&quot;payouts&quot;)">Payouts</li>
+				<li class="smartTabIl selector" id="showblocks-selector" onclick="switchView(&quot;showblocks&quot;)">Blocks</li>
+			</ul>
+		</div>
+	</main>
+	<link href="/static/css/hamburgers.min.css" rel="stylesheet">
+	<link href="/static/css/cswitch.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:700,600,500&amp;family=Roboto+Mono:wght@600&amp;display=swap" rel="stylesheet"><!--<script src="/static/scripts/jquery-3.4.1.min.js"></script>-->
+	<form>
+		<input hidden="" id="lang-code" value="en"> 
+		<script>
+		            LANGUAGE_CODE=$("#lang-code").val()
+		</script> 
+		<script src="/static/scripts/main.js">
+		</script> 
+		<script src="/static/scripts/highcharts.js">
+		</script> 
+		<script src="/static/scripts/moment.js">
+		</script> 
+		<script src="/static/scripts/nanobar.min.js">
+		</script> 
+		<script src="/static/scripts/pool-stats.js">
+		</script> 
+		<script src="/static/scripts/humanize-duration.js">
+		</script> 
+		<script src="/static/scripts/util.js">
+		</script> 
+		<script>
+		                 if (location.href != redirect)
+		                 {
+		                  window.wallet=location.href.split('.page/')[1].split('?')[0].split('#')[0];
+		                  if ((window.location.search.match(/\?/g) || []).length>=1)
+		                   window.currency=window.location.search.split('?')[1].split('#')[0];
+		                      else
+		                   window.currency='usd';
+		                      $(".currencyString").html(window.currency.toUpperCase());
+		                      $('#currencySelect').val(window.currency.toUpperCase());
+		                     }
+		                 else
+		                 {
+		                  window.wallet=window.location.search.split('?')[1].split('#')[0];
+		                  if ((window.location.search.match(/\?/g) || []).length>=2)
+		                   window.currency=window.location.search.split('?')[2].split('#')[0];
+		                      else
+		                   window.currency='usd';
+		                      $(".currencyString").html(window.currency.toUpperCase());
+		                      $('#currencySelect').val(window.currency.toUpperCase());
+		                     }
+		                    
+		                 $('div[contenteditable]').keypress(function(e){
+		                  if (e.keyCode === 13) {
+		                          document.getElementById('submitNewWallet').click();
+		                      e.preventDefault();
+		                          return false;
+		                      }
+		                  return e.which != 13; 
+		                });
+        	</script>
+		<script>
+		            $('#wallet-textarea-for-copy').attr('value',window.wallet)
+		</script> 
+		<script>
+		            $('#aWalletAddress').attr('href','https://etherscan.io/address/'+window.wallet)
+		</script> 
+		<script>
+		            $('#fordesktopWallet').html(window.wallet)
+		</script> 
+		<script>
+		            $('#formobileWallet').html(window.wallet)
+		</script> 
+		<script>
+		            $('#aWalletExport').attr('href','https://flexpool.io/api/v1/export/miner/'+window.wallet+'/payments.csv')
+		</script> 
+		<script src="/static/scripts/pagination.js">
+		</script> 
+		<script src="/static/scripts/paged-table.js">
+		</script> 
+		<script src="/static/scripts/account.js">
+		</script> 
+		<script>
+let fileToLoad='/static/historicData/'+window.wallet+'.js';
+$.ajax({
+    url:fileToLoad,
+    type:'HEAD',
+    async: false,
+    error: function()
+    {
+$('#rewards-chart').html("<div style='margin: auto; width: 80%; padding-top: 20px; '>If you want your data to be displayed here I will need your consent to scrape from flexpool site. I advise sending me an anonymous email with your wallet, like 10 minute email or guerrillamail. <br> <br> https://www.guerrillamail.com/compose <br> <br> My email is tiag.occ0 at gmail dot com <br> The subject should be ENTER <br> In the message put your WALLET (Remeber, it is case sensitive)<br> To stop being scraped just send me the email with OUT as subject and WALLET inside. <br> <br> You may send me your wallet by pm too, if you want.</div>")
+    },
+    success: function()
+    {
+	if (typeof minerHistoricData === 'undefined')    
+		load_js(fileToLoad)
+    }
+});     
+		</script>
+		<script>
+		var cookieTheme=document.cookie.split("theme='")
+                if (cookieTheme !== undefined && cookieTheme.length>1)
+                	cookieTheme=cookieTheme[1].split("'")[0];
+		if (cookieTheme!='' && cookieTheme!=undefined) {
+			clearAnApplyTheme(cookieTheme)
+			document.getElementById('themeSelect').value = cookieTheme;
+		}
+		else {
+			clearAnApplyTheme('dark')
+			document.getElementById('themeSelect').value = 'dark';
+		}
+		$('#blocks-selector').show();
+		togglePro(1);
+		</script>
+	</form>
+	<style>
+	      html {
+	        height: 100%;
+	      }
+	      body {
+	        min-height: 100%;
+	      }
+	      .blank-element {
+		     background-color: transparent !important;
+		 }
+	      @media (max-width:980px) {
+	         .smartTabUl {
+	             display: block !important;
+	         }
+	         .smartTabIl {
+	             width: 100% !important;
+	                 height: 24px;
+	                 padding: 0px !important;
+	                 margin: 10px !important;
+	         }
+	      }          
+	</style>
+	<style>
+	      @font-face{font-family:flexpool-icons;src:url("/static/fonts/fp-icons.woff") format('woff')}
+	</style>
+</body>
+</html>

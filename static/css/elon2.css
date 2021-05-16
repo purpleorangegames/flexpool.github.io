@@ -1,0 +1,49 @@
+[data-theme=dark] {
+    --bg-color-alt: #230707a8;
+    --accent-color: #af3b2f;
+    --text-color: #ffd9b9;
+}
+
+[data-theme=dark] .gray {
+    color: #fff!important;
+}
+
+#workerWindow {
+    background-image: url(/static/assets/elon.webp);
+    background-position: center;
+}
+
+body {
+    background-image: url(/static/assets/elon2.jpg);
+    background-size: cover;
+}
+
+.workerWindowStat {
+    opacity: 0.0;
+}
+.workerWindowStat3 {
+    display: none;
+    opacity: 0.0;
+}
+
+.workerWindowStat2 {
+    background-color: #512f27d4 !important;
+    border-radius: 6px;
+    position: absolute;
+    left: -70px;
+    transform: rotate(90deg);
+    opacity: 0.5;
+}
+
+@media (min-width: 720px)
+.header-stats .stat {
+    width: 100%;
+}
+
+.class-small-window {
+    background-color: var(--bg-color-alt);
+}
+
+.header-stats .stat, .main-stats, .chart, .class-small-window {
+    backdrop-filter: blur(4px);
+}

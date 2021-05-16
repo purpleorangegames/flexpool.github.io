@@ -1,0 +1,82 @@
+[data-theme=dark] .gray {
+    color: #d6c2b4!important;
+}
+
+[data-theme=dark] {
+    --bg-color-alt: #23070700;
+    --accent-color: #4f4158;
+    --text-color: #d29b72;
+    --luck-color: #e25f1f;
+}
+
+.tooltip {
+    background-color: #4f41585c;
+    backdrop-filter: blur(8px);
+}
+
+#extraImage {
+    background-image: url(/static/assets/nebulae.png);
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 290px;
+    left: -100px;
+    opacity: 0.6;   
+}
+
+.chart, .poolstat {
+    width: unset;
+    background-color: #313131f5 !important;
+    border: 1px solid var(--accent-color);
+}
+
+.mt10 { 
+    margin-bottom: 10px;
+}
+
+.simple-wrapper {
+    background-color: #313131f5 !important;
+}
+
+
+body {
+    background-image: url(/static/assets/starbackground.png);
+}
+
+#workerWindow {
+    background-image: url(/static/assets/spacecat.gif);
+    background-position-y: -130px;
+    background-position-x: center;
+}
+
+.workerWindowStat {
+    opacity: 0.0;
+}
+
+.workerWindowStat2 {
+    background-color: #4f415800 !important;
+    border-radius: 6px;
+    position: absolute;
+    left: -70px;
+    transform: rotate(90deg);
+    opacity: 0.5;
+}
+
+.workerWindowStat3 {
+    display: none;
+    opacity: 0.0;
+}
+
+.beta, .class-small-window {
+    border-radius: 5px;
+    border: 1px solid var(--accent-color);
+    position: relative;
+    background: var(--bg-primary);
+    padding: 1rem 1.25rem;
+    background-color: #313131e0;
+}
+
+.header-stats .stat {
+    background-color: #313131e0 !important;
+}

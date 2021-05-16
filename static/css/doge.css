@@ -1,0 +1,37 @@
+[data-theme=dark] {
+    --text-color: #fff7da !important;
+    --accent-color: #cb9800 !important;
+    --luck-color: #906443 !important;
+    --gray-color: #906443 !important;
+}
+
+[data-theme=dark] .gray {
+    color: #906443 !important;
+}
+
+#payout-bar.green .bar {
+    background-color: var(--text-color)!important;
+}
+
+.workerWindowStat {
+    opacity: 0.0;
+}
+
+.workerWindowStat2 {
+    background-color: #906443dd !important;
+    border-radius: 6px;
+    position: absolute;
+    bottom: -20px;
+}
+
+.workerWindowStat3 {
+    display: none;
+    opacity: 0.0;
+}
+
+#workerWindow {
+    background-image: url(/static/assets/dogeAstro4.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

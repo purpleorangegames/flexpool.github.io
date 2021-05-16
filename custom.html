@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+   <head>
+      <style id="nanobarcss" type="text/css">
+         .nanobar{width:100%;height:4px;top:0}.bar{width:0;height:100%;transition:height .3s;background:#000}
+      </style>
+      <link href="https://fonts.gstatic.com/" rel="preconnect">
+      <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+      <link href="https://flexpool.io/" rel="home">
+      <meta content="utf-8" name="charset">
+      <meta content="width=device-width,initial-scale=1" name="viewport">
+      <meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." name="description">
+      <meta content="ethereum mining pool,flexpool,best ethereum mining pool,fastest ethereum mining pool,ethereum pool" name="keywords">
+      <meta content="general" name="rating">
+      <meta content="all" name="robots">
+      <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="googlebot">
+      <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="bingbot">
+      <meta content="flexpool" name="apple-mobile-web-app-title">
+      <meta content="flexpool" name="application-name">
+      <meta content="#2d89ef" name="msapplication-TileColor">
+      <meta content="#ffffff" name="theme-color">
+      <meta content="summary" name="twitter:card">
+      <meta content="@flexpool_io" name="twitter:site">
+      <meta content="0xC8366…11E36 - Flexpool" name="twitter:title">
+      <meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." name="twitter:description">
+      <meta content="@flexpool_io" name="twitter:creator">
+      <meta content="/static/assets/flexpool-large.png" name="twitter:image">
+      <meta content="0xC8366…11E36" property="og:title">
+      <meta content="en_US" property="og:locale">
+      <meta content="website" property="og:type">
+      <meta content="https://flexpool.io/" property="og:url">
+      <meta content="/static/assets/flexpool-large.png" property="og:image">
+      <meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." property="og:description">
+      <meta content="Flexpool" property="og:site_name">
+      <meta content="0xC8366…11E36" itemprop="name">
+      <meta content="The Ethereum mining pool that offers you the best mining experience. The most efficient mining engine powered by ultrafast worldwide servers." itemprop="description">
+      <meta content="https://flexpool.io/apple-touch-icon.png" itemprop="image">
+      <script>
+         function detectAndApplyColorScheme(){var e="light";if(localStorage.getItem("theme"))"dark"==localStorage.getItem("theme")&&(e="dark");else{if(!window.matchMedia)return!1;window.matchMedia("(prefers-color-scheme: dark)").matches&&(e="dark")}document.documentElement.setAttribute("data-theme",e)}detectAndApplyColorScheme()
+      </script>
+      <link href="/static/css/pool-stats.css" rel="stylesheet">
+      <link href="/static/css/block-stats.css" rel="stylesheet">
+      <link href="/static/css/main.css" rel="stylesheet">
+      <link href="/static/css/footer.css" rel="stylesheet">
+      <link href="/ru/wallet" hreflang="ru" rel="alternate">
+      <link href="/es/wallet" hreflang="es" rel="alternate">
+      <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+      <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+      <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+      <link href="/manifest.json" rel="manifest">
+      <link href="/safari-pinned-tab.svg" rel="mask-icon">
+      <link href="/static/css/pagination.css" rel="stylesheet">
+      <link href="/static/css/tables.css" rel="stylesheet">
+      <link href="/static/css/account.css" rel="stylesheet">
+      <link href="/static/css/tooltip.css" rel="stylesheet">
+      <link href="/static/css/scrollbar.css" rel="stylesheet">
+      <link href="/static/css/glowtext.css" rel="stylesheet">
+      <link href="/static/css/classWindows.css" rel="stylesheet">
+      <script src="/static/historicData/lastBlocks.js"></script>
+      <script src="/static/historicData/poolServers.js"></script>
+      <script src="/static/scripts/jquery-3.4.1.min.js"></script>
+      <script src="assets/lib/base-64/base64.js" type="text/javascript"></script>
+      <script src="assets/lib/larder/larder.js" type="text/javascript"></script>
+      <script src="assets/lib/gitters/gitters.js" type="text/javascript"></script>
+      <script src="/static/scripts/js.cookie.min.js"></script>
+      <script>
+         var redirect = location.href
+      </script>
+      <script src="ghspa.js" type="text/javascript"></script>
+      <title>Flexpool</title>
+   </head>
+   <body>
+      <div id="extraImage"></div>
+      <script src="../ghspa.js" type="text/javascript"></script>
+
+      
+<!--------------------------------------------------------------------->
+<div id="chooseDiv" style="width: 100%; height: 100%; position: absolute; background-color: rgba(0, 0, 0, 0.52); z-index: 1; overflow: hidden; display: none;">
+<div style="position: absolute;left: 50%;">
+<div style="position: relative; left: -50%;">
+<div class="class-small-window" style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  align-content: flex-start;
+                  justify-content: space-around;
+                  flex-direction: row;
+                  z-index: 1;
+                  width: 100%;
+                  min-width: 800px;
+                  margin: 40px auto;
+                  /*height: calc(100vh - 80px);*/
+                  ">
+<h3 class="class-wide class-small-window-title" style="height: 30px;width: 75%;">Choose</h3>
+<div class="btn class-button" onclick="$('#chooseDiv').toggle()" style="width: 20%;">Close</div>
+
+<h3 class="class-wide class-small-window-title class-add-line" style="height: 30px;width: 95%;text-align: center;margin-top: 10px;">Line</h3>
+<div class="btn class-button class-add-line" onclick="addNewItem(this);" style="width: 46%;">Line 3</div>
+<div class="btn class-button class-add-line" onclick="addNewItem(this);" style="width: 46%;">Line 4</div>
+<!--<div class="btn class-button class-add-line" onclick="addNewItem(this);" style="width: 46%;">Graph</div>
+<div class="btn class-button class-add-line" onclick="addNewItem(this);" style="width: 46%;">Table</div>-->
+
+<h3 class="class-wide class-small-window-title class-add-box" style="height: 30px;width: 95%;text-align: center;margin-top: 10px;">Box</h3>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">User / Rank / Joined</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Payout Limit / Pool Donation</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Control</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Workers / Reported Hash</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Unpaid Balance / Fiat</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Average Hash / Current Hash</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Pool Hash / Eth Difficulty</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Gas Price Limit / Gas Prices</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Round Share / Appr. Block Reward</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Approximate Rewards B/D/W/M</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">24 Shares / Valid/Stale/Invalid</div>
+<div class="btn class-button class-add-box" onclick="addNewItem(this);" style="width: 46%;">Next Payment / Reached</div>
+
+<h3 class="class-wide class-small-window-title class-add-graph" style="height: 30px;width: 95%;text-align: center;margin-top: 10px;">Graph</h3>
+<div class="btn class-button class-add-graph" onclick="addNewItem(this);" style="width: 46%;">Graph 1</div>
+<div class="btn class-button class-add-graph" onclick="addNewItem(this);" style="width: 46%;">Graph 2</div>
+<h3 class="class-wide class-small-window-title class-add-table" style="height: 30px;width: 95%;text-align: center;margin-top: 10px;">Table</h3>
+<div class="btn class-button class-add-table" onclick="addNewItem(this);" style="width: 46%;">Table 1</div>
+<div class="btn class-button class-add-table" onclick="addNewItem(this);" style="width: 46%;">Table 2</div>
+
+</div>
+</div>
+</div>
+</div>
+<!--------------------------------------------------------------------->
+
+
+
+      <main style="margin-top: 0px;overflow-x: hidden;">
+         <input id="wallet-textarea-for-copy" style="display:none" value="">
+         <div class="class-small-window account beta" style="margin-top: 10px;margin-bottom: 20px;min-height: 0;">
+<div class="btn" style="height: 10px;margin-bottom: 2px;padding-top: 4px;background-color: var(--accent-color);color: var(--text-color);width: 30px;position: absolute;right: 10px;" onclick="toggleAdd('line');">Add</div>
+<div class="btn" style="height: 10px;margin-bottom: 2px;padding-top: 4px;background-color: var(--accent-color);color: var(--text-color);width: 30px;position: absolute;right: 64px;" onclick="toggleEdit(this);">Edit</div>
+            <div id="wallet" style="
+               margin: auto;
+               font-size: 18px;
+               "></div>
+            <div class="header-stats" id="donateWindow" style="display: none;margin-top: 20px;">
+               <div class="stat" style="text-align: center;align-items: center;height: 40px;margin-bottom: 20px;">
+                  <script src="https://ko-fi.com/widgets/widget_2.js" type="text/javascript"></script> 
+                  <script type="text/javascript">
+                     kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L3L0459K6');kofiwidget2.draw();
+                  </script>
+                  <style>img.kofiimg{display: initial!important;vertical-align:middle;height:13px!important;width:20px!important;padding-top:0!important;padding-bottom:0!important;border:none;margin-top:0;margin-right:5px!important;margin-left:0!important;margin-bottom:3px!important;content:url('https://storage.ko-fi.com/cdn/cup-border.png')}.kofiimg:after{vertical-align:middle;height:25px;padding-top:0;padding-bottom:0;border:none;margin-top:0;margin-right:6px;margin-left:0;margin-bottom:4px!important;content:url('https://storage.ko-fi.com/cdn/whitelogo.svg')}.btn-container{display:inline-block!important;white-space:nowrap;min-width:160px}span.kofitext{color:#fff !important;letter-spacing: -0.15px!important;text-wrap:none;vertical-align:middle;line-height:33px !important;padding:0;text-align:center;text-decoration:none!important; text-shadow: 0 1px 1px rgba(34, 34, 34, 0.05);}.kofitext a{color:#fff !important;text-decoration:none:important;}.kofitext a:hover{color:#fff !important;text-decoration:none}a.kofi-button{box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);line-height:36px!important;min-width:150px;display:inline-block!important;background-color:#29abe0;padding:2px 12px !important;text-align:center !important;border-radius:7px;color:#fff;cursor:pointer;overflow-wrap:break-word;vertical-align:middle;border:0 none #fff !important;font-family:'Quicksand',Helvetica,Century Gothic,sans-serif !important;text-decoration:none;text-shadow:none;font-weight:700!important;font-size:14px !important}a.kofi-button:visited{color:#fff !important;text-decoration:none !important}a.kofi-button:hover{opacity:.85;color:#f5f5f5 !important;text-decoration:none !important}a.kofi-button:active{color:#f5f5f5 !important;text-decoration:none !important}.kofitext img.kofiimg {height:15px!important;width:22px!important;display: initial;animation: kofi-wiggle 3s infinite;}@keyframes kofi-wiggle{0%{transform:rotate(0) scale(1)}60%{transform:rotate(0) scale(1)}75%{transform:rotate(0) scale(1.12)}80%{transform:rotate(0) scale(1.1)}84%{transform:rotate(-10deg) scale(1.1)}88%{transform:rotate(10deg) scale(1.1)}92%{transform:rotate(-10deg) scale(1.1)}96%{transform:rotate(10deg) scale(1.1)}100%{transform:rotate(0) scale(1)}}</style>
+                  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" type="text/css">
+                  <div class="btn-container"><a title="Support me on ko-fi.com" class="kofi-button" style="background-color:#29abe0;" href="https://ko-fi.com/L3L0459K6" target="_blank"> <span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi donations" class="kofiimg">Support Me on Ko-fi</span></a></div>
+               </div>
+               <div class="stat" style="text-align: center;align-items: center;height: 40px;margin-bottom: 20px;">
+                  <div class="gray subbalance" style=" font-family: monospace; font-size: 1.5em; text-overflow: ellipsis; width: 100%;">
+                     ETH Wallet: 0xC8366d03F3F88cc0769efDa34B241f4eEDD11E36
+                  </div>
+               </div>
+            </div>
+            <div id="banner"></div>
+         </div>
+         <div class="custom">
+            <!--START-->
+            <div class="class-custom-div-4" codeid="-001" id="A">
+               <!-- Workers Online / Current Hashrate --> 
+               <div class="class-small-window" codeid="001">
+                  <h3 class="class-small-window-title" style="
+                     overflow: hidden;
+                     text-overflow: ellipsis;
+                     ">User</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-account-rank">Rank: <mark><span class="account-rank rank-glowText" style="font-size: 24px; color: white;">Hero</span></mark></div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-first-joined">Joined: 0 months ago</div>
+               </div>
+               <!-- Unpaid Balance / Approximate Fiat Value --> 
+               <div class="class-small-window" codeid="002">
+                  <h3 class="class-small-window-title">Payout Limit</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-min-payout-threshold">
+                        0.0 ETH
+                     </div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-pool-donation">Pool Donation: -</div>
+               </div>
+               <!-- Average / Current Paying Hashrate --> 
+               <div class="class-small-window" codeid="003" style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  align-content: space-around;
+                  justify-content: space-between;
+                  ">
+                  <h3 class="class-wide class-small-window-title" style="height: 30px;">Control</h3>
+                  <div class="btn" id="autoRefresh" style="height: 10px;margin-bottom: 2px;padding-top: 4px;background-color: var(--accent-color);color: var(--text-color);width: 40%;">Refresh</div>
+                  <div class="btn" id="refreshData" style="height: 10px;margin-bottom: 2px;padding-top: 4px;background-color: var(--accent-color);color: var(--text-color);width: 40%;">Reload</div>
+                  <div class="btn" id="donateTabToggle" style="height: 10px;margin-bottom: 2px;padding-top: 4px;color: var(--text-color);background: black;border-color: var(--accent-color);border-width: 2px;background-color: var(--accent-color);border-radius: 4px;cursor: pointer;text-align-last: center;width: 40%;">Donate</div>
+                  <div class="btn" style="height: 10px;margin-bottom: 2px;padding-top: 4px;color: var(--text-color);background: black;border-color: var(--accent-color);border-width: 2px;background-color: var(--accent-color);border-radius: 4px;cursor: pointer;text-align-last: center;width: 40%;">
+<select id="themeSelect" onchange="
+                     let themeSelected=$('#themeSelect option:selected').val()
+                     if (themeSelected=='togglewidth')
+                     {
+                     if ($('main').css('max-width')=='980px')
+                     {
+                     $('main').css('max-width','98%');
+                     //$('main').css('margin','0');
+                     $('main').css('margin-top','0');
+                     }
+                     else
+                     {
+                     $('main').css('max-width','971px');
+                     $('main').css('margin','140px auto 0');
+                     $('main').css('margin-top','0');
+                     }
+                     $('#refreshData').click();
+                     }
+                     else if (themeSelected=='mixthemes')
+                     {
+                     if (mixThemes==undefined || mixThemes==0)
+                     mixThemes=1;
+                     else
+                     mixThemes=0;
+                     }
+                     else
+                     {
+                     clearAnApplyTheme(themeSelected);
+                     }" style="
+                     border-color: var(--accent-color);
+                     background-color: var(--accent-color);
+                     color: var(--text-color);
+                     cursor: pointer;
+                     width: 100%;
+                     text-align-last: center;
+                     ">
+                     <option value="light">Light</option>
+                     <option value="dark">Dark</option>
+                     <option value="chocolate">Chocolate</option>
+                     <option value="chocolate2">Chocolate II: Electric Bugaloo</option>
+                     <option value="gb">GB</option>
+                     <option value="thudder">Thudder</option>
+                     <option value="doge">Doge</option>
+                     <option value="boomer">Boomer</option>
+                     <option value="elon">Elon</option>
+                     <option value="elon2">Elon 2</option>
+                     <option value="teameurope">Europe</option>
+                     <option value="teameurope2">Europe 2</option>
+                     <option value="beta">Beta?</option>
+                     <option value="spacecat">Space Cat</option>
+                     <option value="darkmario">Dark Mario</option>
+                     <option value="mixthemes">Mix Themes</option>
+                     <option value="togglewidth">Toggle Width</option>
+                  </select>
+
+                  </div>
+               </div>
+            </div>
+            <!--END-->
+            <div class="class-custom-div-4" codeid="-001" id="B">
+               <!-- Workers Online / Current Hashrate --> 
+               <div class="class-small-window" codeid="004">
+                  <h3 class="class-small-window-title">Workers Online/Offline</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-online-offline-workers">
+                        <div class="">0/<span class="class-alternative-text-color">0</span></div>
+                     </div>
+                     <div class="class-small-window-secondary-data class-reported_hashrate">Reported: 0.0 MH/s</div>
+                  </div>
+               </div>
+               <!-- Unpaid Balance / Approximate Fiat Value --> 
+               <div class="class-small-window" codeid="005">
+                  <h3 class="class-small-window-title">Unpaid Balance</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-unpaid-balance">
+                        0.0 ETH
+                     </div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-unpaid-balance-usd">
+                     ≈ 0.0
+                     <div style="margin-left: 6px;" class="currencyString">USD</div>
+                  </div>
+               </div>
+               <!-- Average / Current Paying Hashrate --> 
+               <div class="class-small-window" codeid="006">
+                  <h3 class="class-small-window-title">Average Paying Hashrate</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-average_hashrate">
+                        0.0 MH/s
+                     </div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-effective_hashrate">Current: 0.0 MH/s</div>
+               </div>
+            </div>
+            <!--END-->
+            <!--START-->
+            <div class="class-custom-div-4" codeid="-001" id="C">
+               <!-- Pool Hashrate / ETH Difficulty -->
+               <div class="class-small-window" codeid="007">
+                  <h3 class="class-small-window-title">Pool Hashrate</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-poolHashrate">0.0 TH/s</div>
+                     <div class="class-small-window-secondary-data class-ethdifficulty">ETH Difficulty: 0.0 P</div>
+                  </div>
+               </div>
+               <!-- Gas Price Limit / Gas Prices -->
+               <div class="class-small-window" codeid="008">
+                  <h3 class="class-small-window-title">Gas Price Limit</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-currentGasSettings">0 Gwei</div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-gasPrices">Gas Prices: 0 / 0 / 0</div>
+               </div>
+               <!-- Current Round Share / Approximate Reward -->
+               <div class="class-small-window" codeid="009">
+                  <h3 class="class-small-window-title">Current Round Share</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-round-share-percent">
+                        0.0%
+                     </div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-approx-next-block-reward2">Appr.Rew.: 0.0 ETH</div>
+               </div>
+            </div>
+            <!--END-->
+            <!--START-->
+            <div class="class-custom-div-4" codeid="-001" id="D">
+               <div class="class-small-window class-no-bottom-padding" codeid="010">
+                  <div class="flexcol class-wide">
+                     <h3 class="class-small-window-title">Approximate Rewards</h3>
+                     <div class="gray subbalance">
+                        <div style="width: 58px;">Block</div>
+                        <span class="class-approx-next-block-reward class-rewards-eth-small">0.000000</span>ETH
+                        <span class="class-approx-next-block-reward-usd class-rewards-eth-small-currency">0.00</span>
+                        &nbsp;
+                        <div class="currencyString">USD</div>
+                     </div>
+                     <div class="gray subbalance">
+                        <div style="width: 58px;">Day</div>
+                        <span class="class-approx-next-daily-reward class-rewards-eth-small">0.000000</span>ETH
+                        <span class="class-approx-next-daily-reward-usd class-rewards-eth-small-currency">0.00</span>
+                        &nbsp;
+                        <div class="currencyString">USD</div>
+                     </div>
+                     <div class="gray subbalance">
+                        <div style="width: 58px;">07 D</div>
+                        <span class="class-approx-next-weekly-reward class-rewards-eth-small">0.000000</span>ETH
+                        <span class="class-approx-next-weekly-reward-usd class-rewards-eth-small-currency">0.00</span>
+                        &nbsp;
+                        <div class="currencyString">USD</div>
+                     </div>
+                     <div class="gray subbalance">
+                        <div style="width: 58px;">30 D</div>
+                        <span class="class-approx-next-monthly-reward class-rewards-eth-small">0.000000</span>ETH
+                        <span class="class-approx-next-monthly-reward-usd class-rewards-eth-small-currency">0.00</span>
+                        &nbsp;
+                        <div class="currencyString">USD</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="class-small-window class-no-bottom-padding" codeid="011">
+                  <h3 class="class-small-window-title">24h Shares</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-valid_shares">
+                        0 <span class="class-normal-gray-text valid_shares_percentage">Valid (0.00%)</span>
+                     </div>
+                     <div class="class-small-window-secondary-data class-stale-invalid-shares class-small-font-size">
+                        0 Stale (0.00%) / 0 Invalid (0.00%)
+                     </div>
+                  </div>
+               </div>
+               <div class="class-small-window" codeid="012">
+                  <h3 class="class-small-window-title">Next Payment</h3>
+                  <div class="class-small-window-data">
+                     <div class="class-small-window-primary-data class-porcentage-reached">0% Reached</div>
+                  </div>
+                  <div class="class-small-window-secondary-data class-timeToGetPaid">0 days, 0 hours, 0 mins.</div>
+               </div>
+            </div>
+            <!--END-->
+
+
+
+
+
+         </div>
+      </main>
+      <link href="/static/css/hamburgers.min.css" rel="stylesheet">
+      <link href="/static/css/cswitch.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:700,600,500&amp;family=Roboto+Mono:wght@600&amp;display=swap" rel="stylesheet">
+      <!--<script src="/static/scripts/jquery-3.4.1.min.js"></script>-->
+      <form>
+         <input hidden="" id="lang-code" value="en"> 
+         <script>
+            LANGUAGE_CODE=$("#lang-code").val()
+         </script> 
+         <script src="/static/scripts/main.js"></script> 
+         <script src="/static/scripts/highcharts.js"></script> 
+         <script src="/static/scripts/moment.js"></script> 
+         <script src="/static/scripts/nanobar.min.js"></script> 
+         <script src="/static/scripts/pool-stats.js"></script> 
+         <script src="/static/scripts/humanize-duration.js"></script> 
+         <script src="/static/scripts/util.js"></script> 
+         <script>
+            if (location.href != redirect)
+            {
+             window.wallet=location.href.split('.page/')[1].split('?')[0].split('#')[0];
+             if ((window.location.search.match(/\?/g) || []).length>=1)
+              window.currency=window.location.search.split('?')[1].split('#')[0];
+                 else
+              window.currency='usd';
+                 $(".currencyString").html(window.currency.toUpperCase());
+                 $('#currencySelect').val(window.currency.toUpperCase());
+                }
+            else
+            {
+             window.wallet=window.location.search.split('?')[1].split('#')[0];
+             if ((window.location.search.match(/\?/g) || []).length>=2)
+              window.currency=window.location.search.split('?')[2].split('#')[0];
+                 else
+              window.currency='usd';
+                 $(".currencyString").html(window.currency.toUpperCase());
+                 $('#currencySelect').val(window.currency.toUpperCase());
+                }
+               
+            $('div[contenteditable]').keypress(function(e){
+             if (e.keyCode === 13) {
+                     document.getElementById('submitNewWallet').click();
+                 e.preventDefault();
+                     return false;
+                 }
+             return e.which != 13; 
+            });
+         </script>
+         <script>
+            $('#wallet-textarea-for-copy').attr('value',window.wallet)
+            $('#wallet').text(window.wallet)
+         </script> 
+         <script>
+            $('#aWalletAddress').attr('href','https://etherscan.io/address/'+window.wallet)
+         </script> 
+         <script>
+            $('#fordesktopWallet').html(window.wallet)
+         </script> 
+         <script>
+            $('#formobileWallet').html(window.wallet)
+         </script> 
+         <script>
+            $('#aWalletExport').attr('href','https://flexpool.io/api/v1/export/miner/'+window.wallet+'/payments.csv')
+         </script> 
+         <script src="/static/scripts/pagination.js"></script> 
+         <script src="/static/scripts/paged-table.js"></script> 
+         <script src="/static/scripts/account.js"></script> 
+         <script>
+            let fileToLoad='/static/historicData/'+window.wallet+'.js';
+            $.ajax({
+                url:fileToLoad,
+                type:'HEAD',
+                async: false,
+                error: function()
+                {
+            $('#rewards-chart').html("<div style='margin: auto; width: 80%; padding-top: 20px; '>If you want your data to be displayed here I will need your consent to scrape from flexpool site. I advise sending me an anonymous email with your wallet, like 10 minute email or guerrillamail. <br> <br> https://www.guerrillamail.com/compose <br> <br> My email is tiag.occ0 at gmail dot com <br> The subject should be ENTER <br> In the message put your WALLET (Remeber, it is case sensitive)<br> To stop being scraped just send me the email with OUT as subject and WALLET inside. <br> <br> You may send me your wallet by pm too, if you want.</div>")
+                },
+                success: function()
+                {
+            	if (typeof minerHistoricData === 'undefined')    
+            		load_js(fileToLoad)
+                }
+            });     
+            		
+         </script>
+         <script>
+            var cookieTheme=document.cookie.split("theme='")
+                          if (cookieTheme !== undefined && cookieTheme.length>1)
+                          	cookieTheme=cookieTheme[1].split("'")[0];
+            if (cookieTheme!='' && cookieTheme!=undefined) {
+            	clearAnApplyTheme(cookieTheme)
+            	document.getElementById('themeSelect').value = cookieTheme;
+            }
+            else {
+            	clearAnApplyTheme('dark')
+            	document.getElementById('themeSelect').value = 'dark';
+            }
+            $('#blocks-selector').show();
+            togglePro(1);
+            loadCustomStructure();
+         </script>
+      </form>
+      <style>
+         html {
+         height: 100%;
+         }
+         body {
+         min-height: 100%;
+         }
+         .blank-element {
+         background-color: transparent !important;
+         }
+         @media (max-width:980px) {
+         .smartTabUl {
+         display: block !important;
+         }
+         .smartTabIl {
+         width: 100% !important;
+         height: 24px;
+         padding: 0px !important;
+         margin: 10px !important;
+         }
+         }          
+      </style>
+      <style>
+         @font-face{font-family:flexpool-icons;src:url("/static/fonts/fp-icons.woff") format('woff')}
+      </style>
+   </body>
+</html>

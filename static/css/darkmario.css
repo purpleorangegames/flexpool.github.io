@@ -1,0 +1,78 @@
+[data-theme=dark] .gray {
+    color: #dcdcdc!important;
+}
+
+[data-theme=dark] {
+    --bg-color-alt: #23070700;
+    --accent-color: #849c9c;
+    --text-color: #a03125;
+    --luck-color: #e25f1f;
+}
+
+.tooltip {
+    background-color: #0c0c0c5c;
+    backdrop-filter: blur(8px);
+}
+
+.chart, .poolstat {
+    width: unset;
+    background-color: #3131317a !important;
+    /*border: 1px solid var(--accent-color);*/
+}
+
+.mt10 { 
+    margin-bottom: 10px;
+}
+
+.simple-wrapper {
+    background-color: #3131318c !important;
+}
+
+
+body {
+    background-image: url(/static/assets/mario2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position-y: top;
+}
+
+#workerWindow {
+background-image: url(/static/assets/mario1.png);
+    background-position-y: 0px;
+    background-position-x: 10px;
+    background-repeat: no-repeat;
+    filter: brightness(0.9) blur(0.9px) saturate(0.8);
+    border: 1px solid #a03125;
+    mix-blend-mode: difference;
+}
+
+.workerWindowStat {
+    opacity: 0.0;
+}
+
+.workerWindowStat2 {
+    background-color: #4f415800 !important;
+    border-radius: 6px;
+    position: absolute;
+    left: -70px;
+    transform: rotate(90deg);
+    /*opacity: 0.5;*/
+}
+
+.workerWindowStat3 {
+    display: none;
+    opacity: 0.0;
+}
+
+.beta {
+    border-radius: 5px;
+    /*border: 1px solid var(--accent-color);*/
+    position: relative;
+    background: var(--bg-primary);
+    padding: 1rem 1.25rem;
+    background-color: #3131311f;
+}
+
+.header-stats .stat {
+    background-color: #3131311f !important;
+}

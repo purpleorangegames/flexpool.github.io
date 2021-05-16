@@ -1,0 +1,30 @@
+#workerWindow {
+    background-image: url(/static/assets/bulbasaurThudder2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.bulba {
+    background-image: url(/static/assets/bulbasaurIcon.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    color: transparent;
+}
+
+.workerWindowStat {
+    opacity: 0.0;
+}
+.workerWindowStat3 {
+    display: none;
+    opacity: 0.0;
+}
+
+.workerWindowStat2 {
+    background-color: #1b1b1ba3 !important;
+    border-radius: 6px;
+    position: absolute;
+    left: -70px;
+    transform: rotate(90deg);
+    opacity: 0.5;
+}

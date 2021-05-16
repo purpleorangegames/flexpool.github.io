@@ -1,0 +1,55 @@
+div.account, div.stat, div.main-stats, .stats.mt10, .stat {
+  background-color: #cbe7d9 !important
+}
+
+#workerWindow {
+    background-image: url(/static/assets/gbETH2.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 320px; 
+}
+
+#balance, #round-share-percent, #totalPaidBalance, #totalPaidBalanceUnpaid {
+    background-color: #0d0d0d;
+    color: #b20faf;
+}
+
+div.main-stats {
+    background-color: #cbe7d9 !important;
+}
+
+[data-theme=dark] .gray {
+    color: #5b5d63!important;
+}
+
+[data-theme=dark] {
+    --bg-color: #161616;
+    --text-color: #406ba3;
+    --gray-color: #363636;
+    --accent-color: #b20faf;
+    --problem-color: #752c2c;
+    --luck-color: orange;
+}
+
+.workerWindowStat2 {
+    background-color: #0d0d0dc4 !important;
+    border-radius: 6px;
+    position: absolute;
+    bottom: -20px;
+}
+.workerWindowStat3 {
+    display: none;
+    opacity: 0.0;
+}
+
+.workerWindowStat {
+    opacity: 0.0;
+}
+
+.stats.mt10 {
+    background-color: #cbe7d9 !important;
+}
+
+.btn {
+    color: #0d0d0d;
+}

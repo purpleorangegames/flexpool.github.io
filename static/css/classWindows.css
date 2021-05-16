@@ -1,0 +1,105 @@
+.class-custom-div-4 {
+    display: grid;
+    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+.class-small-window {
+    border-radius: 5px;
+    border: 1px solid var(--gray-color);
+    position: relative;
+    background: var(--bg-color);
+    padding: 1rem 1.25rem;
+    margin: 0;
+    box-sizing: border-box;
+    min-height: 124px;
+}
+
+.class-small-window-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.class-small-window-data {
+    margin-top: 0.75rem;
+}
+
+.class-small-window-primary-data {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.class-alternative-text-color {
+    color: var(--bluegray-color);
+}
+
+.class-small-window-secondary-data {
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: var(--gray-text-color);
+    display: flex;
+}
+
+.class-rewards-eth-small {
+    margin: auto;
+    font-family: monospace;
+    padding-right: 4px;
+}
+
+.class-rewards-eth-small-currency {
+    margin: auto;
+    font-family: monospace;
+    padding-left: 6px;
+    width: 58px;
+    text-align: end;
+}
+
+.class-wide {
+    width: 100%;
+}
+
+.class-no-bottom-padding {
+    padding-bottom: 0px;
+}
+
+.class-small-font-size {
+    font-size: 12px;
+}
+
+.class-normal-gray-text {
+    font-size: 1.0rem;
+    color: var(--gray-text-color);
+}
+
+
+.class-2x-bottom-padding {
+    padding-bottom: 2px;
+}
+
+.class-button {
+    height: 10px;
+    margin-bottom: 2px;
+    padding-top: 4px;
+    color: var(--text-color);
+    border-color: var(--accent-color);
+    border-width: 2px;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    cursor: pointer;
+    text-align-last: center;
+    width: 40%;
+}
+
+.class-button-window {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-between;
+}
