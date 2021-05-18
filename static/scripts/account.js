@@ -1487,8 +1487,8 @@ function loadEverything()
 		{
 			newDate=new Date(newDate.setDate(newDate.getDate() - 1));
 			let stringNewDate = newDate.getFullYear()+"-"+(newDate.getMonth() + 1)+"-"+newDate.getDate();
-			sumCountBlock+=count[stringNewDate];
-			sumEntireBlock+=sumBlock[stringNewDate];
+			sumCountBlock+=parseFloat(count[stringNewDate] || 0);
+			sumEntireBlock+=parseFloat(sumBlock[stringNewDate] || 0);
 		}
 		let averageBlockReward=(sumEntireBlock/sumCountBlock)/1000000000000000000.0;
 		let blockShare=parseFloat(Math.round(100 * roundSharePercentage * 1e4) / 1e4);
