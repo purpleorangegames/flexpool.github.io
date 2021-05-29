@@ -833,7 +833,7 @@ $('#default-reward-selector').removeClass('selector-selected'); render_rewards_a
 			</div>
 			<h1 class="center" style="margin-top:30px;margin-bottom:5px">Transactions</h1>
 			<div style="display:flex;justify-content:flex-end;height:25px">
-				<a class="noglow" href="https://flexpool.io/api/v1/export/miner/wallet/payments.csv" id="aWalletExport"><span class="gray">Export in</span> <b>CSV</b></a>
+				<a class="noglow" href="https://api.flexpool.io/v2/miner/export/payments.csv" id="aWalletExport"><span class="gray">Export in</span> <b>CSV</b></a>
 			</div>
 			<div class="simple-wrapper beta">
 				<div class="table-wrapper inline">
@@ -1066,7 +1066,8 @@ $('#default-reward-selector').removeClass('selector-selected'); render_rewards_a
 		            $('#formobileWallet').html(window.wallet)
 		</script> 
 		<script>
-		            $('#aWalletExport').attr('href','https://flexpool.io/api/v1/export/miner/'+window.wallet+'/payments.csv')
+		            //$('#aWalletExport').attr('href','https://flexpool.io/api/v1/export/miner/'+window.wallet+'/payments.csv')
+		            $('#aWalletExport').attr('href','https://api.flexpool.io/v2/miner/export/payments.csv?coin=eth&address='+window.wallet+'&countervalue='+window.currency)
 		</script> 
 		<script src="/static/scripts/pagination.js">
 		</script> 
