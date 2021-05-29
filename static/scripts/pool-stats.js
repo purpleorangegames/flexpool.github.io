@@ -1,5 +1,16 @@
 function renderHashrateChart() {
-    $.get("https://flexpool.io/api/v1/pool/hashrateChart/", {}, (function(t) {
+    $.get("https://api.flexpool.io/v2/pool/hashrateChart?coin=eth", {}, (function(t) {
+        let newResult=[],i,j
+        for (i=0;i<t.result.length;++i) {
+         let aux={'timestamp':t.result[i].timestamp, 'total':t.result[i].total}
+         let keys=Object.keys(t.result[i].regions)
+         for (j=0;j<t.result.length;++j) {
+          aux[keys[j]]=t.result[i].regions[keys[j]]
+         }
+         newResult.push(aux)
+        }
+        t.result=newResult
+     
         data = t.result, SERVER_EXCLUDED = ["total", "timestamp"], total_data = [], servers_data = {}, si_data = [], data.forEach((function(t, a) {
             si_data.push(t.total)
         })), si_data = getSiOfData(si_data), data.forEach((function(t, a) {
@@ -60,19 +71,19 @@ function renderHashrateChart() {
 //})), 
 
 function getPoolHashrateData() {
-    $.get("https://flexpool.io/api/v1/pool/avgLuckRoundtime/", {}, (function(t) {
-    $("#avgluck_").removeClass("mainstats-flex-center"), color = "green", t.result.luck < 1 && (color = "gray"), $("#avgluck_").html(`<mark class="luck-value ${color}">${formatLuck(t.result.luck,isPro)}</mark>%`), $("#avgluck_ mark").attr("data-luck", t.result.luck)
+    $.get("https://api.flexpool.io/v2/pool/averageLuck?coin=eth", {}, (function(t) {
+    $("#avgluck_").removeClass("mainstats-flex-center"), color = "green", t.result < 1 && (color = "gray"), $("#avgluck_").html(`<mark class="luck-value ${color}">${formatLuck(t.result,isPro)}</mark>%`), $("#avgluck_ mark").attr("data-luck", t.result)
 })).fail((function(t) {
     console.error("Unable to get avg luck", t)
-})), $.get("https://flexpool.io/api/v1/pool/minersOnline/", {}, (function(t) {
+})), $.get("https://api.flexpool.io/v2/pool/minerCount?coin=eth", {}, (function(t) {
     $("#total-miners").html(t.result)
 })).fail((function(t) {
     console.error("Unable to get miners online", t)
-})), $.get("https://flexpool.io/api/v1/pool/workersOnline/", {}, (function(t) {
+})), $.get("https://api.flexpool.io/v2/pool/workerCount?coin=eth", {}, (function(t) {
     $("#total-workers").html(t.result)
 })).fail((function(t) {
     console.error("Unable to get workers online", t)
-})), $.get("https://flexpool.io/api/v1/pool/hashrate/", {}, (function(t) {
+})), $.get("https://api.flexpool.io/v2/pool/hashrate?coin=eth", {}, (function(t) {
     hashrate = getSi(t.result.total), $("#pool-hashrate").html(Math.round(t.result.total / hashrate[0] * 100) / 100), $("#pool-hashrate-si").html(hashrate[1])
 })).fail((function(t) {
     console.error("Unable to get workers online", t)
