@@ -442,7 +442,7 @@ function renderStats(e) {
 		height: 0
 	}, 500, (function() {
 		$("#worker-header").hide()
-	})), window.prev_worker = e, renderHeader(e), url = "" == e ? `https://flexpool.io/api/v1/miner/${window.wallet}/chart` : `https://flexpool.io/api/v1/worker/${window.wallet}/${e}/chart`, $.get(url, {}, (function(e) {
+	})), window.prev_worker = e, renderHeader(e), url = "" == e ? `https://old.flexpool.io/api/v1/miner/${window.wallet}/chart` : `https://old.flexpool.io/api/v1/worker/${window.wallet}/${e}/chart`, $.get(url, {}, (function(e) {
 		effective_hashrate_chartdata = [], reported_hashrate_chartdata = [], average_effective_hashrate_chartdata = [], valid_shares_chartdata = [], stale_shares_chartdata = [], invalid_shares_chartdata = [], data = e.result, effective_hashrate_avg = [], data.forEach((function(e, t) {
 			0 != e.effective_hashrate && effective_hashrate_avg.push(e.effective_hashrate)
 		})), effective_hashrate_avg = arrAvg(effective_hashrate_avg), si = getSi(effective_hashrate_avg), window.chart_hasrate_si = si[1], data.forEach((function(e, t) {
@@ -454,31 +454,31 @@ function renderStats(e) {
 }
 
 function renderHeader(e) {
-	url = "" == e ? `https://flexpool.io/api/v1/miner/${window.wallet}/stats/` : `https://flexpool.io/api/v1/worker/${window.wallet}/${e}/stats/`, $.get(url, {}, (function(e) {
+	url = "" == e ? `https://old.flexpool.io/api/v1/miner/${window.wallet}/stats/` : `https://old.flexpool.io/api/v1/worker/${window.wallet}/${e}/stats/`, $.get(url, {}, (function(e) {
 		data = e.result, effective_hashrate = sif(data.current.effective_hashrate), average_effective = sif(data.daily.effective_hashrate), reported_hashrate = sif(data.current.reported_hashrate), $("#effective_hashrate").html(`<mark class="big">${effective_hashrate[0]}</mark> ${effective_hashrate[1]}H/s`), $("#average_hashrate").html(`<mark class="big">${average_effective[0]}</mark> ${average_effective[1]}H/s`), $("#reported_hashrate").html(`<mark class="big">${reported_hashrate[0]}</mark> ${reported_hashrate[1]}H/s`), valid_shares = data.daily.valid_shares, stale_shares = data.daily.stale_shares, invalid_shares = data.daily.invalid_shares, $("#valid_shares").html(`<mark class="big">${valid_shares}</mark>`), $("#stale_shares").html(`<mark class="big">${stale_shares}</mark>`), $("#invalid_shares").html(`<mark class="big">${invalid_shares}</mark>`), total_shares = valid_shares + stale_shares + invalid_shares, total_shares > 0 && (fdata = (valid_shares / total_shares * 100), isNaN(fdata) || $("#valid_shares_percentage").html(fdata.toFixed(2)), fdata = (valid_shares / total_shares * 100), isNaN(fdata) || $("#valid_shares_percentage_big").html(fdata.toFixed(2)), fdata = (stale_shares / total_shares * 100), isNaN(fdata) || $("#stale_shares_percentage").html(fdata.toFixed(2)), fdata = (invalid_shares / total_shares * 100), isNaN(fdata) || $("#invalid_shares_percentage").html(fdata.toFixed(2))), $("#effective_hashrate2").html($("#effective_hashrate").html()), $("#average_hashrate2").html($("#average_hashrate").html()), $("#reported_hashrate2").html($("#reported_hashrate").html()), $("#valid_shares2").html($("#valid_shares").html()), $("#stale_shares2").html($("#stale_shares").html()), $("#invalid_shares2").html($("#invalid_shares").html()), $("#valid_shares_percentage2").html($("#valid_shares_percentage").html()), $("#stale_shares_percentage2").html($("#stale_shares_percentage").html()), $("#invalid_shares_percentage2").html($("#invalid_shares_percentage").html())
 	}))
 }
 
 function renderPaymentsData(e) {
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/totalPaid`, {}, (function(t) {
+	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/totalPaid`, {}, (function(t) {
 		totalPaid = t.result / Math.pow(10, 18), $(".total-paid").html( /*Math.round*/ ((100 * totalPaid) / 100).toFixed(4)), $(".total-paid-usd").html(formatMoney(totalPaid * e))
 	})).fail((function(e) {
 		console.error("Unable to get total paid", e)
-	})), $.get(`https://flexpool.io/api/v1/miner/${window.wallet}/totalDonated`, {}, (function(t) {
+	})), $.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/totalDonated`, {}, (function(t) {
 		totalDonated = t.result / Math.pow(10, 18), $(".total-donated").html( /*Math.round*/ ((100 * totalDonated) / 100).toFixed(4)), $(".total-donated-usd").html(formatMoney(totalDonated * e))
 	})).fail((function(e) {
 		console.error("Unable to get total donated", e)
-	})), $.get(`https://flexpool.io/api/v1/miner/${window.wallet}/paymentCount`, {}, (function(e) {
+	})), $.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/paymentCount`, {}, (function(e) {
 		$(".total-payouts").html(e.result)
 	}))
 }
 
 function render_payments(e) {
-	renderPagedTable("payments", "https://flexpool.io/api/v1/miner/" + window.wallet + "/payments", {}, e, "render_payments", paymentsTableDataFilter)
+	renderPagedTable("payments", "https://old.flexpool.io/api/v1/miner/" + window.wallet + "/payments", {}, e, "render_payments", paymentsTableDataFilter)
 }
 
 function render_payments_chart() {
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/paymentsChart`, {}, (function(e) {
+	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/paymentsChart`, {}, (function(e) {
 		data = e.result, chart_data = [], data.forEach((function(e, t) {
 			chart_data.push([1e3 * e.timestamp, e.amount / Math.pow(10, 18)])
 		})), chart_data.reverse(), renderPayoutChart(chart_data)
@@ -656,7 +656,7 @@ $.ajax({
 }
 
 function renderBlocksData() {
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/blockCount`, {}, (function(e) {
+	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/blockCount`, {}, (function(e) {
 		if (e.result > 0) {
 			$(".nostats").remove()
 			$("#blocks").show();
@@ -673,7 +673,7 @@ function renderBlocksData() {
 }
 
 function renderPoolBlocksData() {
-	$.get(`https://flexpool.io/api/v1/pool/blockCount`, {}, (function(e) {
+	$.get(`https://old.flexpool.io/api/v1/pool/blockCount`, {}, (function(e) {
 		$("#blocks-mined").html(e.result.confirmed)
 	})).fail((function(e) {
 		console.error("Unable to load block count", e)
@@ -681,7 +681,7 @@ function renderPoolBlocksData() {
 }
 
 function renderUncPoolBlocksData() {
-	$.get(`https://flexpool.io/api/v1/pool/blockCount`, {}, (function(e) {
+	$.get(`https://old.flexpool.io/api/v1/pool/blockCount`, {}, (function(e) {
 		$("#blocks-mined").html(e.result.unconfirmed)
 	})).fail((function(e) {
 		console.error("Unable to load block count", e)
@@ -689,17 +689,17 @@ function renderUncPoolBlocksData() {
 }
 
 function render_blocks(e) {
-	renderPagedTable("blocks", "https://flexpool.io/api/v1/miner/" + window.wallet + "/blocks", {}, e, "render_blocks", blocksTableDataFilter)
+	renderPagedTable("blocks", "https://old.flexpool.io/api/v1/miner/" + window.wallet + "/blocks", {}, e, "render_blocks", blocksTableDataFilter)
 }
 
 function render_poolblocks(e) {
-	renderPagedTable("poolblocks", "https://flexpool.io/api/v1/pool/blocks", {
+	renderPagedTable("poolblocks", "https://old.flexpool.io/api/v1/pool/blocks", {
 		confirmed: 1
 	}, e, "render_poolblocks", poolBlocksTableDataFilter)
 }
 
 function render_uncpoolblocks(e) {
-	renderPagedTable("uncpoolblocks", "https://flexpool.io/api/v1/pool/blocks", {
+	renderPagedTable("uncpoolblocks", "https://old.flexpool.io/api/v1/pool/blocks", {
 		confirmed: 0
 	}, e, "render_uncpoolblocks", poolBlocksTableDataFilter)
 }
@@ -1243,7 +1243,7 @@ async function copyAddress() {
 }
 
 function reloadOnlyWorker() {
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
+	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
 	//$('#workers-table tr').remove();
         let htmlToUse=''
 	, onlineWorkers = 0
@@ -1294,23 +1294,23 @@ function loadEverything()
 {
     Promise.all([
 		$.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=" + ((window.currency == undefined || window.currency == "") ? "usd" : window.currency), {}, (function(r) { window.ethPrice = r.ethereum[Object.keys(r.ethereum)[0]] }))
-	,	$.ajax({type: 'GET', url: `https://flexpool.io/api/v1/miner/${window.wallet}/totalPaid/`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://flexpool.io/api/v1/miner/${window.wallet}/balance/`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://flexpool.io/api/v1/miner/${window.wallet}/roundShare/`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://flexpool.io/api/v1/pool/blocks?page=0`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://flexpool.io/api/v1/pool/hashrate`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://flexpool.io/api/v1/miner/${window.wallet}/details`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/totalPaid/`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/balance/`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/roundShare/`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/pool/blocks?page=0`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/pool/hashrate`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/details`, success: function(r) {} })
 	
-	,	$.get("https://flexpool.io/api/v1/pool/avgLuckRoundtime", {}, (function(l) {
+	,	$.get("https://old.flexpool.io/api/v1/pool/avgLuckRoundtime", {}, (function(l) {
 			$("#avgluck").css("display", ""),
 			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result.luck,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result.luck,false)}</mark>%`),
 			$("#avgluck mark").attr("data-luck", l.result.luck),
 			$("#avgroundtime").html(humanizeDuration(1e3 * l.result.round_time, { largest: 1, language: LANGUAGE_CODE }))
 		}))
-	,	$.get("https://flexpool.io/api/v1/pool/blockCount", {}, (function(l) {
+	,	$.get("https://old.flexpool.io/api/v1/pool/blockCount", {}, (function(l) {
 			$("#block-count").html(l.result.confirmed + l.result.unconfirmed)
 		}))
-	,	$.get(`https://flexpool.io/api/v1/pool/currentLuck`, {}, (function(t) {
+	,	$.get(`https://old.flexpool.io/api/v1/pool/currentLuck`, {}, (function(t) {
 			$("#current-luck").html(`<span class="luck-value" data-luck="${t.result}">${formatLuck(t.result,/*isPro*/false)}</span>%`);
 			$("#currentluck").css("display", "");
 			$("#currentluck").html(`<mark class="luck-value">${formatLuck(t.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(t.result,false)}</mark>%`);
@@ -1332,7 +1332,7 @@ function loadEverything()
 			$(".class-gasPrices").html("Gas Prices: "+gasPrices);
 		}))
 	
-	,	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/stats/`, {}, (function(e) {
+	,	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/stats/`, {}, (function(e) {
 			data = e.result,
 			effective_hashrate = sif(data.current.effective_hashrate),
 			average_effective = sif(data.daily.effective_hashrate),
@@ -1364,7 +1364,7 @@ function loadEverything()
 			$(".class-stale-invalid-shares").html(`${stale_shares} Stale (${stale_sharesP.toFixed(2)}%) / ${invalid_shares} Invalid (${invalid_sharesP.toFixed(2)}%)</br>`)
 		}))
 	
-	,   $.get(`https://flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
+	,   $.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
 			let htmlToUse=''
 			, onlineWorkers = 0
 			, offlineWorkers = 0;
@@ -1574,7 +1574,7 @@ function loadEverything()
 				$.ajax({
 					async: false,
 					type: 'GET',
-					url: 'https://flexpool.io/api/v1/pool/blocks?page=' + count,
+					url: 'https://old.flexpool.io/api/v1/pool/blocks?page=' + count,
 					success: function(t1) {
 						count = count + 1;
 						let l = t1.result.data.length,
@@ -1656,114 +1656,6 @@ function loadEverything()
 		//console.log('done')
 	});
 }
-/*
-function loadBalance(e) {
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/balance/`, {}, (function(t) {
-		$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/totalPaid/`, {}, (function(t2) {
-			t2.result > 0 ? balance2 = t2.result / Math.pow(10, 18) : balance2 = 0,
-				$("#totalPaidBalance").html((Math.round(1e7 * balance2) / 1e7).toFixed(6)), /*balance > 0 && getEthPrice((function(e) {*/
-				//$("#totalPaidBalance-usd").html(balance2),
-				/*}))* /
-				t.result > 0 ? balance = t.result / Math.pow(10, 18) : balance = 0,
-				$("#totalPaidBalanceUnpaid").html((Math.round(1e7 * (balance + balance2)) / 1e7).toFixed(6)),
-				$("#balance").html((Math.round(1e7 * balance) / 1e7).toFixed(6)), balance > 0 && getEthPrice((function(e) {
-					$("#totalPaidBalanceUnpaid-usd").html(formatMoney((balance + balance2) * e))
-					$("#totalPaidBalance-usd").html(formatMoney(balance2 * e))
-					$("#balance-usd").html(formatMoney(balance * e))
-					$("#currentETHPrice").html(e.toFixed(2))
-				})), bar = new Nanobar({
-					target: document.getElementById("payout-bar")
-				}), payoutPercentage = t.result / e * 100, estimatedDailyProfitTooltipRequired = !0, payoutPercentage >= 100 && ($("#payout-bar").addClass("green"), $("#timeToGetPaid").html(""), $("#tooltip-balance-bar").html(_("100% of payout limit reached.<br>You will be paid in the next payment round.")), payoutPercentage = 99.99999999, estimatedDailyProfitTooltipRequired = !1), $.get(`https://flexpool.io/api/v1/miner/${window.wallet}/estimatedDailyRevenue/`, {}, (function(a) {
-					estimatedDailyProfitTooltipRequired && (payoutETA = (e - t.result) / a.result * 86400, $("#timeToGetPaid").html(humanizeDuration(1e3 * payoutETA, {
-						units: ["d", "h", "m"],
-						maxDecimalPoints: 2,
-						language: LANGUAGE_CODE
-					}) + "."), $("#tooltip-balance-bar").html(String(Math.round(payoutPercentage)) + "% " + _("of payout limit reached.<br>Payout limit would be reached in") + " " + humanizeDuration(1e3 * payoutETA, {
-						units: ["d", "h", "m"],
-						maxDecimalPoints: 2,
-						language: LANGUAGE_CODE
-					}) + "."))
-				})), $(".payout-percentage").html(Math.round(payoutPercentage)),
-				$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/roundShare`, {}, (function(e2) {
-					$("#round-share-percent").html(Math.round(100 * e2.result * 1e4) / 1e4 + "%"),
-						$.get("https://flexpool.io/api/v1/pool/averageBlockReward", {}, (function(t) {
-							//$("#approx-next-block-reward").html("" + /*Math.round* / (e2.result * t.result / Math.pow(10, 18) /* * 1e4* / ).toFixed(7 - (e2.result * t.result / Math.pow(10, 18)).countDecimals()) /* / 1e4* / )
-							$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/estimatedDailyRevenue/`, {}, (function(t) {
-								//$("#approx-daily-reward").html("" + /*Math.round* / (t.result / Math.pow(10, 18) /* * 1e4* / ).toFixed(7 - (t.result / Math.pow(10, 18)).countDecimals()) /* / 1e4* / ),
-									//$("#approx-weekly-reward").html("" + /*Math.round* / ((7 * t.result) / Math.pow(10, 18) /* * 1e4* / ).toFixed(7 - ((7 * t.result) / Math.pow(10, 18)).countDecimals()) /* / 1e4* / ),
-									//$("#approx-monthly-reward").html("" + /*Math.round* / ((30 * t.result) / Math.pow(10, 18) /* * 1e4* / ).toFixed(7 - ((30 * t.result) / Math.pow(10, 18)).countDecimals()) /* / 1e4* / ), 
-									getEthPrice((function(e) {
-										//$("#approx-next-block-reward-usd").html(formatMoney(parseFloat($("#approx-next-block-reward").html()) * e))
-										//$("#approx-daily-reward-usd").html(formatMoney(parseFloat($("#approx-daily-reward").html()) * e))
-										//$("#approx-weekly-reward-usd").html(formatMoney(parseFloat($("#approx-weekly-reward").html()) * e))
-										//$("#approx-monthly-reward-usd").html(formatMoney(parseFloat($("#approx-monthly-reward").html()) * e))
-
-
-										$.get(`https://flexpool.io/api/v1/pool/blocks?page=0`, {}, (function(t1) {
-											$("#ethdifficulty").html((t1.result.data[0].difficulty/1000000000000000).toFixed(2)+' P');
-											$(".workerWindowStat3").show();
-											$.get(`https://flexpool.io/api/v1/pool/hashrate`, {}, (function(t2) {
-												var blockPerMinute = ((t1.result.data[0].difficulty / t2.result.total) / 60).toFixed(1);
-												var blockPerDay = ((60 / blockPerMinute) * 24).toFixed(1);
-												$("#blocksPerMinute").html(blockPerMinute + " mins");
-												$("#blocksPerDay").html(blockPerDay);
-												$("#poolHashrate").html((t2.result.total / 1000000000000).toFixed(3) + " TH/s");
-			
-{
-    let sumBlock = {}
-    let count = {}
-
-	for (i=0;i<lastBlocksData.length;i++)
-	{
-	 let date = new Date(parseInt(lastBlocksData[i].split("|")[0])*1000)
-	 let stringDate = date.getFullYear()+"-"+(date.getMonth() + 1)+"-"+date.getDate();
-     if (sumBlock[stringDate] == undefined) sumBlock[stringDate]=0
-     sumBlock[stringDate]=sumBlock[stringDate]+parseFloat(lastBlocksData[i].split("|")[2])
-     if (count[stringDate] == undefined) count[stringDate]=0
-     count[stringDate]=count[stringDate]+1
-    }
-    
-    let newDate = new Date();
-    let timesToSum = 3
-    let sumCountBlock = 0
-    let sumEntireBlock = 0
-    for (i=0;i<timesToSum;i++)
-    {
-	 newDate=new Date(newDate.setDate(newDate.getDate() - 1));
-	 let stringNewDate = newDate.getFullYear()+"-"+(newDate.getMonth() + 1)+"-"+newDate.getDate();
-     sumCountBlock+=count[stringNewDate]
-     sumEntireBlock+=sumBlock[stringNewDate]
-    }
-    let averageBlockReward=(sumEntireBlock/sumCountBlock)/1000000000000000000.0
-    let blocksPerDay=parseFloat($('#blocksPerDay').html())
-    let blockShare=parseFloat(Math.round(100 * e2.result * 1e4) / 1e4)//parseFloat(($('#round-share-percent').html()).replace("%",""))
-    let averageBlockEarnings=averageBlockReward*(blockShare/100)
-    let averageDailyEarnings=averageBlockEarnings*blocksPerDay
-    //console.log(averageBlockEarnings,averageDailyEarnings)
-
-    $("#approx-next-block-reward").html("" + (averageBlockEarnings).toFixed(7 - (averageBlockEarnings).countDecimals()))
-    $("#approx-daily-reward").html("" + (averageDailyEarnings).toFixed(7 - (averageDailyEarnings).countDecimals()))
-    $("#approx-weekly-reward").html("" + ((averageDailyEarnings*7)).toFixed(7 - ((averageDailyEarnings*7)).countDecimals()))
-    $("#approx-monthly-reward").html("" + ((averageDailyEarnings*30)).toFixed(7 - ((averageDailyEarnings*30)).countDecimals()))
-}
-$("#approx-next-block-reward-usd").html(formatMoney(parseFloat($("#approx-next-block-reward").html()) * e))
-$("#approx-daily-reward-usd").html(formatMoney(parseFloat($("#approx-daily-reward").html()) * e))
-$("#approx-weekly-reward-usd").html(formatMoney(parseFloat($("#approx-weekly-reward").html()) * e))
-$("#approx-monthly-reward-usd").html(formatMoney(parseFloat($("#approx-monthly-reward").html()) * e))
-
-											}));
-										}));
-
-									}))
-							}))
-						}))
-				})), $(".payout-percentage").html(Math.round(payoutPercentage)), bar.go(payoutPercentage)
-		}))
-	})).fail((function(e) {
-		console.error("Unable to fetch balance", e)
-	}))
-}
-*/
 
 function applyPoolDonation(e, t) { //colors: hero-rainbow, hero, brown, vip, yellow, freeloader, vip, mvp, loyalminer
 	switch (window.wallet){
@@ -1806,325 +1698,6 @@ function applyPoolDonation(e, t) { //colors: hero-rainbow, hero, brown, vip, yel
 var reloadTimer = 0
 var startCountdown = 0
 var workerTimer = setInterval(reloadOnlyWorker, 30000);
-
-/*
-function loadData() {
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/details`, {}, (function(e) {
-		loadBalance(e.result.min_payout_threshold);
-		e.result.first_joined > 0 ? (rank = applyPoolDonation(e.result.pool_donation), $(".account-rank").html(rank[0]), $(".account-rank").addClass("rank-" + rank[1]), $(".pool-donation").html(`<mark>${Math.round(100*e.result.pool_donation*100)/100}%</mark>`), $("#settings-donation").attr("value", 100 * e.result.pool_donation), $("#settings_min_payout_threshold").attr("value", e.result.min_payout_threshold / 1e18), e.result.max_fee_price > 0 ? $("#settings_gas_price_limit").attr("value", e.result.max_fee_price) : $("#settings_gas_price_limit").attr("placeholder", _("Not set")), $("#settings-email").attr("placeholder", e.result.censored_email), $("#settings-ip").attr("placeholder", e.result.censored_ip), $(".min-payout-threshold").html(`<mark>${Math.round(e.result.min_payout_threshold/1e18*100)/100} ETH</mark>`), $(".first-joined").html(`<mark>${formatAgo(humanizeDuration(Date.now()-1e3*e.result.first_joined,{largest:1,language:LANGUAGE_CODE}))}</mark>`)) : ($(".account-rank").html("N/A"), $(".account-rank").css("color", "#aaa"), $(".pool-donation").html("N/A"), $(".min-payout-threshold").html("N/A"), $(".first-joined").html("N/A"))
-		$("#refreshData").prop("disabled", false);
-		$("#refreshData").html("Reload");
-	})).fail((function(e) {
-		console.error("Unable to load data!", e)
-	})), $.get(`https://flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
-		onlineWorkers = 0, offlineWorkers = 0, e.result.forEach((function(e) {
-			e.name = encodeHTML(e.name), workerOffline = !e.online, workerOffline ? offlineWorkers++ : onlineWorkers++, classAdditions = "", workerOffline && (classAdditions += "red"), htmldata = `<tr><td id="worker-${e.name}" onclick="renderStats('${e.name}');" sort-key="${e.name}" sort-type="str" class="mono ${classAdditions}"><div class="space-between"><span class="worker-name black-underline ${classAdditions}">${e.name}`, e.same_name_count > 1 && (htmldata += `<span class="bluegray" style="margin-left: 5px;"> (${e.same_name_count})</span>`), htmldata += "</span>", htmldata += '</div></td><td class="mono ', workerOffline && (htmldata += "bluegray"), reportedSi = getSi(e.reported_hashrate), htmldata += `" sort-key="${e.reported_hashrate}" sort-type="int">${Math.round(e.reported_hashrate/reportedSi[0]*10)/10}<span class="bluegray">&nbsp;${reportedSi[1]}H/s</span></td><td class="mono `, effectiveSi = getSi(e.effective_hashrate), lastSeen = Date.now() - 1e3 * e.last_seen, lastSeen < 1e3 ? lastSeenHuman = "now" : lastSeenHuman = formatAgo(humanizeDuration(lastSeen, {
-				largest: 1,
-				language: LANGUAGE_CODE,
-				round: !0
-			})), workerOffline && (htmldata += "bluegray"), totalShares = e.valid_shares + e.stale_shares + e.invalid_shares, htmldata += `" sort-key="${e.effective_hashrate}" sort-type="int">${Math.round(e.effective_hashrate/effectiveSi[0]*10)/10}<span class="bluegray">&nbsp;${effectiveSi[1]}H/s</span></td><td sort-key="${e.valid_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.valid_shares}</div><span class="bluegray">(${(e.valid_shares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.stale_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.stale_shares}</div><span class="bluegray">(${(e.stale_shares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.invalid_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.invalid_shares}</div><span class="bluegray">(${(e.invalid_shares/totalShares*100).toFixed(2)}%)</span></div></td><td id="last-seen-worker-${encodeHTML(e.name)}">${lastSeenHuman}</td></tr>`, $("#rigstats-tbody").append(htmldata)
-		})), $(".online-workers").html(onlineWorkers), $(".offline-workers").html(offlineWorkers)
-	})).fail((function(e) {
-		console.error("Unable to get workers data", e)
-	}))
-	//average luck + average round time
-	$.get("https://flexpool.io/api/v1/pool/avgLuckRoundtime", {}, function(l) {
-		$("#avgluck").css("display", ""),
-			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result.luck,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result.luck,false)}</mark>%`),
-			$("#avgluck mark").attr("data-luck", l.result.luck),
-			$("#avgroundtime").html(humanizeDuration(1e3 * l.result.round_time, {
-				largest: 1,
-				language: LANGUAGE_CODE
-			}))
-	}).fail(function(l) {
-		console.error("Unable to get avg luck", l)
-	}), $.get("https://flexpool.io/api/v1/pool/blockCount", {}, function(l) {
-		$("#block-count").html(l.result.confirmed + l.result.unconfirmed)
-	}).fail(function(l) {
-		console.error("Unable to get block count", l)
-	}), $.get("https://flexpool.io/api/v1/pool/currentLuck", {}, function(l) {
-		$("#current-luck").html(`<span class="luck-value" data-luck="${l.result}">${formatLuck(l.result,/*isPro* /false)}</span>%`)
-	}).fail(function(l) {
-		console.error("Unable to get current luck", l)
-	})
-	//
-	//average blocks based on pool hashrate and blocks per day
-	/*
-	$.get(`https://flexpool.io/api/v1/pool/blocks?page=0`, {}, (function(t1) {
-		$.get(`https://flexpool.io/api/v1/pool/hashrate`, {}, (function(t2) {
-			var blockPerMinute = ((t1.result.data[0].difficulty / t2.result.total) / 60).toFixed(1);
-			var blockPerDay = ((60 / blockPerMinute) * 24).toFixed(1);
-			$("#blocksPerMinute").html(blockPerMinute + " mins");
-			$("#blocksPerDay").html(blockPerDay);
-			$("#poolHashrate").html((t2.result.total / 1000000000000).toFixed(3) + " TH/s");
-			
-			
-			$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/roundShare`, {}, (function(e2) {
-				console.log('Test',blockPerDay,Math.round(100 * e2.result * 1e4) / 1e4);
-			}));
-												   
-		}));
-	}));
-	* /
-	//
-	$.get(`https://flexpool.io/api/v1/pool/currentLuck`, {}, (function(t) {
-		$("#currentluck").css("display", ""),
-			$("#currentluck").html(`<mark class="luck-value">${formatLuck(t.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(t.result,false)}</mark>%`),
-			$("#currentluck mark").attr("data-luck", t.result)
-	}));
-	$("#gasPrices").html("")
-	$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=RC1BAJSDTF26J5D3VYHHSZC93XRFTDQKR2`, {}, (function(t) {
-		if (t.result.SafeGasPrice == undefined) {
-			$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=4P9URNA4GRJWYV45GW4XE4CZSTXUB41Y5V`, {}, (function(t) {
-				if (t.result.SafeGasPrice == undefined) {
-					$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=97P7K57FXX34M489NFZWWKKX4V8EF27RHW`, {}, (function(t) {
-						if (t.result.SafeGasPrice == undefined) {} else $("#gasPrices").html(t.result.SafeGasPrice + " / " + t.result.ProposeGasPrice + " / " + t.result.FastGasPrice)
-					}));
-				} else $("#gasPrices").html(t.result.SafeGasPrice + " / " + t.result.ProposeGasPrice + " / " + t.result.FastGasPrice)
-			}));
-		} else $("#gasPrices").html(t.result.SafeGasPrice + " / " + t.result.ProposeGasPrice + " / " + t.result.FastGasPrice)
-	}));
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/details`, {}, (function(e) {
-		$("#currentGasSettings").html(e.result.max_fee_price)
-	}));
-
-
-
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/roundShare`, {}, (function(t) {
-		let currentTime = new Date();
-		let currentDay = String(currentTime.getDate()).padStart(2, '0'),
-			day = String(currentTime.getDate()).padStart(2, '0'),
-			currentHour = currentTime.getHours(),
-			count = 0,
-			countToday = 0,
-			countTodayUncle = 0,
-			count24 = 0,
-			count24Uncle = 0,
-			luck = 0,
-			effort = 0,
-			hours = 0,
-			gotBlockNumber = false,
-			lastBlockTime = new Date(),
-			gotLastBlockTime = false,
-			reward24 = 0,
-			rewardToday = 0,
-			unconfirmed = 0,
-			unconfirmedReward = 0;
-
-        let j=0, lastBlocksArray=[], maxNumber=0
-        for (j=0;j<lastBlocksData.length;j++)
-        {
-         let tempArray=lastBlocksData[j].split("|"), tempDict={}
-         tempDict["timestamp"]=tempArray[0]
-         tempDict["total_rewards"]=tempArray[2]
-         tempDict["type"]=tempArray[3]
-         tempDict["number"]=tempArray[4]
-         tempDict["luck"]=tempArray[6].split(',')[0]
-	 tempDict["confirmed"]=true
-         maxNumber=Math.max(maxNumber,parseInt(tempArray[4]))
-         lastBlocksArray.push(tempDict)
-        }
-
-		do { 
-			$.ajax({
-				async: false,
-				type: 'GET',
-				url: 'https://flexpool.io/api/v1/pool/blocks?page=' + count,
-				success: function(t1) {
-					count = count + 1;
-					let l = t1.result.data.length,
-						i = 0;
-					for (i = 0; i < l; i++) if (!gotBlockNumber) {
-					    if (t1.result.data[i].number>maxNumber)
-						{
-							let tempDict={}
-							tempDict["timestamp"]=t1.result.data[i].timestamp
-							tempDict["total_rewards"]=t1.result.data[i].total_rewards
-							tempDict["type"]=t1.result.data[i].type
-							tempDict["number"]=t1.result.data[i].number
-							tempDict["luck"]=t1.result.data[i].luck
-							tempDict["confirmed"]=t1.result.data[i].confirmed
-							lastBlocksArray.push(tempDict)
-						}
-                        			else
-                       				{
-							gotBlockNumber=true;
-                        			}
-					
-						let date = new Date(t1.result.data[i].timestamp * 1000);
-						if (gotLastBlockTime == false) {
-							gotLastBlockTime = true;
-							lastBlockTime = lastBlockTime.getTime() - date.getTime();
-						}
-						day = String(date.getDate()).padStart(2, '0');
-						hours = Math.abs(currentTime - date) / 36e5;
-					    /*
-						if (currentDay == day) {
-							countToday = countToday + 1;
-							rewardToday = rewardToday + (Math.round(t1.result.data[i].total_rewards / Math.pow(10, 18) * 100) / 100);
-						}
-						if (currentDay == day && t1.result.data[i].type == "uncle") countTodayUncle = countTodayUncle + 1;
-						if (hours < 24) {
-							count24 = count24 + 1;
-							effort = effort + formatLuck(t1.result.data[i].luck, true);
-							luck = luck + formatLuck(t1.result.data[i].luck, false);
-							reward24 = reward24 + (Math.round(t1.result.data[i].total_rewards / Math.pow(10, 18) * 100) / 100);
-						}
-						if (hours < 24 && t1.result.data[i].type == "uncle") {
-							count24Uncle = count24Uncle + 1;
-						}
-						if (t1.result.data[i].confirmed == false) {
-							unconfirmed = unconfirmed + 1;
-							unconfirmedReward = unconfirmedReward + (Math.round(t1.result.data[i].total_rewards / Math.pow(10, 18) * 100) / 100) * (Math.round(100 * t.result * 1e4) / 1e4) / 100;
-						}
-						* /
-					}
-				}
-			});
-		} while (hours < 24 && !gotBlockNumber)
-		
-		for (i=0;i<lastBlocksArray.length;i++)
-		{
-		 let date = new Date(lastBlocksArray[i]['timestamp'] * 1000);
-		 day = String(date.getDate()).padStart(2, '0');
-		 hours = Math.abs(currentTime - date) / 36e5;
-
-		 if (currentDay == day) {
-		 	countToday = countToday + 1;
-		 	rewardToday = rewardToday + (Math.round(lastBlocksArray[i]['total_rewards'] / Math.pow(10, 18) * 100) / 100);
-		 }
-		 if (currentDay == day && lastBlocksArray[i]['type'] == "uncle") countTodayUncle = countTodayUncle + 1;
-		 if (hours < 24) {
-		 	count24 = count24 + 1;
-		 	effort = effort + formatLuck(lastBlocksArray[i]['luck'], true);
-		 	luck = luck + formatLuck(lastBlocksArray[i]['luck'], false);
-		 	reward24 = reward24 + (Math.round(lastBlocksArray[i]['total_rewards'] / Math.pow(10, 18) * 100) / 100);
-		 }
-		 if (hours < 24 && lastBlocksArray[i]['type'] == "uncle") {
-		 	count24Uncle = count24Uncle + 1;
-		 }
-		 if (lastBlocksArray[i]['confirmed'] == false) {
-		 	unconfirmed = unconfirmed + 1;
-		 	unconfirmedReward = unconfirmedReward + (Math.round(lastBlocksArray[i]['total_rewards'] / Math.pow(10, 18) * 100) / 100) * (Math.round(100 * t.result * 1e4) / 1e4) / 100;
-		 }
-		}
-
-		effort = effort / count24;
-		luck = (100 / effort) * 100;
-		$("#avgluck24").css("display", ""),
-			$("#avgluck24").html('<mark class="luck-value">' + effort.toFixed(0) + '</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">' + luck.toFixed(0) + '</mark>%'),
-			$("#blocksLast24").html(count24 + "<mark style='color:var(--problem-color);font-size: 24px;padding-left: 4px;'>" + count24Uncle + "</mark> / " + countToday + "<mark style='color:var(--problem-color);font-size: 24px;padding-left: 4px;'>" + countTodayUncle + "</mark>");
-		$("#minedETH").html(reward24.toFixed(1) + " / " + rewardToday.toFixed(1));
-		$("#unconfirmedBalance").html(unconfirmedReward.toFixed(6));
-		if (unconfirmed > 0) {
-			$("#unconfirmedBalContainer").show();
-			$("#unconfirmedBalanceTitle").html('Unconfirmed Balance*: ' + unconfirmed + ` ${unconfirmed > 1 ? "blocks" : "block"}`);
-		} else {
-			$("#unconfirmedBalContainer").hide();
-		}
-		getEthPrice((function(e) {
-			$("#unconfirmedBalance-usd").html(formatMoney(unconfirmedReward * e));
-		}));
-		if (lastBlockTime < 3600000) $("#timeSinceLastBlock").html(humanizeDuration(lastBlockTime, {
-			units: ["m"],
-			maxDecimalPoints: 1,
-			language: LANGUAGE_CODE
-		}));
-		else $("#timeSinceLastBlock").html(humanizeDuration(lastBlockTime, {
-			units: ["h"],
-			maxDecimalPoints: 2,
-			language: LANGUAGE_CODE
-		}));
-	}));
-/*
-	$.get(`https://flexpool.io/api/v1/miner/${window.wallet}/roundShare`, {}, (function(t) {
-		var currentTime = new Date();
-		var currentDay = String(currentTime.getDate()).padStart(2, '0'),
-			day = String(currentTime.getDate()).padStart(2, '0'),
-			currentHour = currentTime.getHours(),
-			count = 0,
-			countToday = 0,
-			countTodayUncle = 0,
-			count24 = 0,
-			count24Uncle = 0,
-			luck = 0,
-			effort = 0,
-			hours = 0,
-			lastBlockTime = new Date(),
-			gotLastBlockTime = false,
-			reward24 = 0,
-			rewardToday = 0,
-			unconfirmed = 0,
-			unconfirmedReward = 0;
-		do {
-			$.ajax({
-				async: false,
-				type: 'GET',
-				url: 'https://flexpool.io/api/v1/pool/blocks?page=' + count,
-				success: function(t1) {
-					count = count + 1;
-					var l = t1.result.data.length,
-						i = 0;
-					for (i = 0; i < l; i++) {
-						var date = new Date(t1.result.data[i].timestamp * 1000);
-						if (gotLastBlockTime == false) {
-							gotLastBlockTime = true;
-							lastBlockTime = lastBlockTime.getTime() - date.getTime();
-						}
-						day = String(date.getDate()).padStart(2, '0');
-						hours = Math.abs(currentTime - date) / 36e5;
-						if (currentDay == day) {
-							countToday = countToday + 1;
-							rewardToday = rewardToday + (Math.round(t1.result.data[i].total_rewards / Math.pow(10, 18) * 100) / 100);
-						}
-						if (currentDay == day && t1.result.data[i].type == "uncle") countTodayUncle = countTodayUncle + 1;
-						if (hours < 24) {
-							count24 = count24 + 1;
-							effort = effort + formatLuck(t1.result.data[i].luck, true);
-							luck = luck + formatLuck(t1.result.data[i].luck, false);
-							reward24 = reward24 + (Math.round(t1.result.data[i].total_rewards / Math.pow(10, 18) * 100) / 100);
-						}
-						if (hours < 24 && t1.result.data[i].type == "uncle") {
-							count24Uncle = count24Uncle + 1;
-						}
-						if (t1.result.data[i].confirmed == false) {
-							unconfirmed = unconfirmed + 1;
-							unconfirmedReward = unconfirmedReward + (Math.round(t1.result.data[i].total_rewards / Math.pow(10, 18) * 100) / 100) * (Math.round(100 * t.result * 1e4) / 1e4) / 100;
-						}
-					}
-				}
-			});
-		} while (hours < 24)
-		effort = effort / count24;
-		luck = (100 / effort) * 100;
-		$("#avgluck24").css("display", ""),
-			$("#avgluck24").html('<mark class="luck-value">' + effort.toFixed(0) + '</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">' + luck.toFixed(0) + '</mark>%'),
-			$("#blocksLast24").html(count24 + "<mark style='color:var(--problem-color);font-size: 24px;padding-left: 4px;'>" + count24Uncle + "</mark> / " + countToday + "<mark style='color:var(--problem-color);font-size: 24px;padding-left: 4px;'>" + countTodayUncle + "</mark>");
-		$("#minedETH").html(reward24.toFixed(1) + " / " + rewardToday.toFixed(1));
-		$("#unconfirmedBalance").html(unconfirmedReward.toFixed(6));
-		if (unconfirmed > 0) {
-			$("#unconfirmedBalContainer").show();
-			$("#unconfirmedBalanceTitle").html('Unconfirmed Balance*: ' + unconfirmed + ` ${unconfirmed > 1 ? "blocks" : "block"}`);
-		} else {
-			$("#unconfirmedBalContainer").hide();
-		}
-		getEthPrice((function(e) {
-			$("#unconfirmedBalance-usd").html(formatMoney(unconfirmedReward * e));
-		}));
-		if (lastBlockTime < 3600000) $("#timeSinceLastBlock").html(humanizeDuration(lastBlockTime, {
-			units: ["m"],
-			maxDecimalPoints: 1,
-			language: LANGUAGE_CODE
-		}));
-		else $("#timeSinceLastBlock").html(humanizeDuration(lastBlockTime, {
-			units: ["h"],
-			maxDecimalPoints: 2,
-			language: LANGUAGE_CODE
-		}));
-	}));
-* /
-}
-*/
 
 $(".settings-modal-bg").click((function() {
 	$(".settings-modal").data("hover") || closeSettings()
@@ -2190,7 +1763,7 @@ $(".settings-modal-bg").click((function() {
 	13 == e.which && openESNotice()
 })), window.workerUpdates = {};
 //let workerUpdateWebsocket = new WebSocket(window.location.protocol.replace("http", "ws") + "//" + window.location.host + "/api/v1/ws/worker-ws/" + window.wallet + "/");
-//let workerUpdateWebsocket = new WebSocket("ws://flexpool.io/api/v1/ws/worker-ws/" + window.wallet + "/");
+//let workerUpdateWebsocket = new WebSocket("ws://old.flexpool.io/api/v1/ws/worker-ws/" + window.wallet + "/");
 async function workerUpdater() {
 	for (;;) {
 		for (worker in window.workerUpdates) lastSeen = Date.now() - window.workerUpdates[worker], lastSeen < 1e3 ? lastSeenHuman = _("now") : lastSeenHuman = formatAgo(humanizeDuration(lastSeen, {
