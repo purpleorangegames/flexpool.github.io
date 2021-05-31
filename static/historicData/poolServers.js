@@ -1,1 +1,1 @@
-let poolServers={ 'Asia': [262,944.94],'Australia': [202,767.55],'Europe': [4050,14905.20],'South America': [294,1029.39],'USA': [2473,9296.97] }
+let poolServers={ 'Asia': [262,944.94],'Australia': [202,767.55],'Europe': [4050,14905.20],'South America': [295,1031.81],'USA': [2473,9296.97] }
