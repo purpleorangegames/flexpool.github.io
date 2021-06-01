@@ -1293,24 +1293,26 @@ function reloadData() {
 function loadEverything()
 {
     Promise.all([
-		$.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=" + ((window.currency == undefined || window.currency == "") ? "usd" : window.currency), {}, (function(r) { window.ethPrice = r.ethereum[Object.keys(r.ethereum)[0]] }))
-	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/totalPaid/`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/balance/`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/roundShare/`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/pool/blocks?page=0`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/pool/hashrate`, success: function(r) {} })
-	,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/details`, success: function(r) {} })
+		//$.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=" + ((window.currency == undefined || window.currency == "") ? "usd" : window.currency), {}, (function(r) { window.ethPrice = r.ethereum[Object.keys(r.ethereum)[0]] }))
+		$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/miner/paymentsStats?coin=eth&address=${window.wallet}`, success: function(r) { window.ethPrice=r.result.price } })
+	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/miner/balance?coin=eth&address=${window.wallet}&countervalue=`+((window.currency == undefined || window.currency == "") ? "usd" : window.currency), success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/miner/roundShare?coin=eth&address=${window.wallet}`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/pool/blocks?coin=eth&page=0`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/pool/hashrate?coin=eth`, success: function(r) {} })
+	//,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/details`, success: function(r) {} })
 	
-	,	$.get("https://old.flexpool.io/api/v1/pool/avgLuckRoundtime", {}, (function(l) {
+	,	$.get("https://api.flexpool.io/v2/pool/averageBlockReward?coin=eth", {}, (function(l) {
+			$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
+		}))
+	,	$.get("https://api.flexpool.io/v2/pool/averageLuck?coin=eth", {}, (function(l) {
 			$("#avgluck").css("display", ""),
-			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result.luck,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result.luck,false)}</mark>%`),
-			$("#avgluck mark").attr("data-luck", l.result.luck),
-			$("#avgroundtime").html(humanizeDuration(1e3 * l.result.round_time, { largest: 1, language: LANGUAGE_CODE }))
+			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result,false)}</mark>%`),
+			$("#avgluck mark").attr("data-luck", l.result)
 		}))
-	,	$.get("https://old.flexpool.io/api/v1/pool/blockCount", {}, (function(l) {
-			$("#block-count").html(l.result.confirmed + l.result.unconfirmed)
+	,	$.get("https://api.flexpool.io/v2/pool/blockStatistics?coin=eth", {}, (function(l) {
+			$("#block-count").html(l.result.total.blocks + l.result.total.uncles + l.result.total.orphans)
 		}))
-	,	$.get(`https://old.flexpool.io/api/v1/pool/currentLuck`, {}, (function(t) {
+	,	$.get(`https://api.flexpool.io/v2/pool/currentLuck?coin=eth`, {}, (function(t) {
 			$("#current-luck").html(`<span class="luck-value" data-luck="${t.result}">${formatLuck(t.result,/*isPro*/false)}</span>%`);
 			$("#currentluck").css("display", "");
 			$("#currentluck").html(`<mark class="luck-value">${formatLuck(t.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(t.result,false)}</mark>%`);
@@ -1332,20 +1334,20 @@ function loadEverything()
 			$(".class-gasPrices").html("Gas Prices: "+gasPrices);
 		}))
 	
-	,	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/stats/`, {}, (function(e) {
+	,	$.get(`https://api.flexpool.io/v2/miner/stats?coin=eth&address=${window.wallet}`, {}, (function(e) {
 			data = e.result,
-			effective_hashrate = sif(data.current.effective_hashrate),
-			average_effective = sif(data.daily.effective_hashrate),
-			reported_hashrate = sif(data.current.reported_hashrate),
+			effective_hashrate = sif(data.currentEffectiveHashrate),
+			average_effective = sif(data.averageEffectiveHashrate),
+			reported_hashrate = sif(data.reportedHashrate),
 			$("#effective_hashrate, #effective_hashrate2").html(`<mark class="big">${effective_hashrate[0]}</mark> ${effective_hashrate[1]}H/s`),
 			$(".class-effective_hashrate").html(`Current: ${effective_hashrate[0]} ${effective_hashrate[1]}H/s`),
 			$("#average_hashrate, #average_hashrate2").html(`<mark class="big">${average_effective[0]}</mark> ${average_effective[1]}H/s`),
 			$(".class-average_hashrate").html(`${average_effective[0]} ${average_effective[1]}H/s`),
 			$("#reported_hashrate, #reported_hashrate2").html(`<mark class="big">${reported_hashrate[0]}</mark> ${reported_hashrate[1]}H/s`),
 			$(".class-reported_hashrate").html(`Reported: ${reported_hashrate[0]} ${reported_hashrate[1]}H/s`),
-			valid_shares = data.daily.valid_shares,
-			stale_shares = data.daily.stale_shares,
-			invalid_shares = data.daily.invalid_shares,
+			valid_shares = data.validShares,
+			stale_shares = data.staleShares,
+			invalid_shares = data.invalidShares,
 			$("#valid_shares, #valid_shares2").html(`<mark class="big">${valid_shares}</mark>`),
 			$("#stale_shares, #stale_shares2").html(`<mark class="big">${stale_shares}</mark>`),
 			$("#invalid_shares, #invalid_shares2").html(`<mark class="big">${invalid_shares}</mark>`),
@@ -1364,31 +1366,31 @@ function loadEverything()
 			$(".class-stale-invalid-shares").html(`${stale_shares} Stale (${stale_sharesP.toFixed(2)}%) / ${invalid_shares} Invalid (${invalid_sharesP.toFixed(2)}%)</br>`)
 		}))
 	
-	,   $.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
+	,   $.get(`https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}`, {}, (function(e) {
 			let htmlToUse=''
 			, onlineWorkers = 0
 			, offlineWorkers = 0;
 			e.result.forEach((function(e) {
 				e.name = encodeHTML(e.name)
-				, workerOffline = !e.online, workerOffline ? offlineWorkers++ : onlineWorkers++
+				, workerOffline = !e.isOnline, workerOffline ? offlineWorkers++ : onlineWorkers++
 				, classAdditions = ""
 				, workerOffline && (classAdditions += "red")
 				, htmldata = `<tr><td id="worker-${e.name}" onclick="renderStats('${e.name}');" sort-key="${e.name}" sort-type="str" class="mono ${classAdditions}"><div class="space-between"><span class="worker-name black-underline ${classAdditions}">${e.name}`
-				, e.same_name_count > 1 && (htmldata += `<span class="bluegray" style="margin-left: 5px;"> (${e.same_name_count})</span>`)
+				, e.count > 1 && (htmldata += `<span class="bluegray" style="margin-left: 5px;"> (${e.count})</span>`)
 				, htmldata += "</span>"
 				, htmldata += '</div></td><td class="mono '
 				, workerOffline && (htmldata += "bluegray")
-				, reportedSi = getSi(e.reported_hashrate)
-				, htmldata += `" sort-key="${e.reported_hashrate}" sort-type="int">${Math.round(e.reported_hashrate/reportedSi[0]*10)/10}<span class="bluegray">&nbsp;${reportedSi[1]}H/s</span></td><td class="mono `
-				, effectiveSi = getSi(e.effective_hashrate)
-				, lastSeen = Date.now() - 1e3 * e.last_seen
+				, reportedSi = getSi(e.reportedHashrate)
+				, htmldata += `" sort-key="${e.reportedHashrate}" sort-type="int">${Math.round(e.reportedHashrate/reportedSi[0]*10)/10}<span class="bluegray">&nbsp;${reportedSi[1]}H/s</span></td><td class="mono `
+				, effectiveSi = getSi(e.currentEffectiveHashrate)
+				, lastSeen = Date.now() - 1e3 * e.lastSeen
 				, lastSeen < 1e3 ? lastSeenHuman = "now" : lastSeenHuman = formatAgo(humanizeDuration(lastSeen, {
 					largest: 1,
 					language: LANGUAGE_CODE,
 					round: !0
 				}))
 				, workerOffline && (htmldata += "bluegray")
-				, totalShares = e.valid_shares + e.stale_shares + e.invalid_shares, htmldata += `" sort-key="${e.effective_hashrate}" sort-type="int">${Math.round(e.effective_hashrate/effectiveSi[0]*10)/10}<span class="bluegray">&nbsp;${effectiveSi[1]}H/s</span></td><td sort-key="${e.valid_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.valid_shares}</div><span class="bluegray">(${(e.valid_shares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.stale_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.stale_shares}</div><span class="bluegray">(${(e.stale_shares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.invalid_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.invalid_shares}</div><span class="bluegray">(${(e.invalid_shares/totalShares*100).toFixed(2)}%)</span></div></td><td id="last-seen-worker-${encodeHTML(e.name)}">${lastSeenHuman}</td></tr>`
+				, totalShares = e.validShares + e.staleShares + e.invalidShares, htmldata += `" sort-key="${e.currentEffectiveHashrate}" sort-type="int">${Math.round(e.currentEffectiveHashrate/effectiveSi[0]*10)/10}<span class="bluegray">&nbsp;${effectiveSi[1]}H/s</span></td><td sort-key="${e.validShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.validShares}</div><span class="bluegray">(${(e.validShares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.staleShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.staleShares}</div><span class="bluegray">(${(e.staleShares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.invalidShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.invalidShares}</div><span class="bluegray">(${(e.invalidShares/totalShares*100).toFixed(2)}%)</span></div></td><td id="last-seen-worker-${encodeHTML(e.name)}">${lastSeenHuman}</td></tr>`
 				,  htmlToUse = htmlToUse+htmldata//$("#rigstats-tbody").append(htmldata)
 			}))
             , $(".online-workers").html(onlineWorkers)
@@ -1399,26 +1401,25 @@ function loadEverything()
 		
 	])
 	.then(([
-		ethCurrentValue
-	,	walletTotalPaid
+	//	ethCurrentValue
+		walletTotalPaid
 	,	walletBalance
 	,	walletRoundShare
 	,	blockPageZero
 	,	poolHashrate
-	,	walletDetails
-	,	walletStats
-	,	walletWorkers
+	//,	walletDetails
 	]) => {
-		ethCurrentValue=window.ethPrice;
-		let totalPaidUntreated=walletTotalPaid.result;
-		let currentBalanceUntreated=walletBalance.result;
+		//ethCurrentValue=window.ethPrice;
+	        ethCurrentValue=walletBalance.result.price;
+		let totalPaidUntreated=walletTotalPaid.result.stats.totalPaid;
+		let currentBalanceUntreated=walletBalance.result.balance;
 		let roundSharePercentage=walletRoundShare.result;
 		let lastBlockDifficulty=blockPageZero.result.data[0].difficulty;
 		let poolTotalHashrate=poolHashrate.result.total;
-		let minPayoutThreshold=walletDetails.result.min_payout_threshold/1000000000000000000.0;
-		let firstJoined=walletDetails.result.first_joined;
-		let poolDonation=walletDetails.result.pool_donation;
-		let maxFeePrice=walletDetails.result.max_fee_price;
+		let minPayoutThreshold=0;//walletDetails.result.min_payout_threshold/1000000000000000000.0;
+		let firstJoined='';//walletDetails.result.first_joined;
+		let poolDonation=0.5;//walletDetails.result.pool_donation;
+		let maxFeePrice=0;//walletDetails.result.max_fee_price;
 		
 		$("#currentGasSettings").html(maxFeePrice);
 		$(".class-currentGasSettings").html(maxFeePrice+" Gwei");
@@ -1574,7 +1575,7 @@ function loadEverything()
 				$.ajax({
 					async: false,
 					type: 'GET',
-					url: 'https://old.flexpool.io/api/v1/pool/blocks?page=' + count,
+					url: 'https://api.flexpool.io/v2/pool/blocks?coin=eth&page=' + count,
 					success: function(t1) {
 						count = count + 1;
 						let l = t1.result.data.length,
