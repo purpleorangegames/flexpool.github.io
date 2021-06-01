@@ -1248,6 +1248,7 @@ function reloadOnlyWorker() {
         let htmlToUse=''
 	, onlineWorkers = 0
 	, offlineWorkers = 0;
+	if (e.result)
 	e.result.forEach((function(e) {
 				e.name = encodeHTML(e.name)
 				, workerOffline = !e.online, workerOffline ? offlineWorkers++ : onlineWorkers++
