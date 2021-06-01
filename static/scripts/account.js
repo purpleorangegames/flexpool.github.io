@@ -1243,7 +1243,7 @@ async function copyAddress() {
 }
 
 function reloadOnlyWorker() {
-	$.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/workers`, {}, (function(e) {
+	$.get(`https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}`, {}, (function(e) {
 	//$('#workers-table tr').remove();
         let htmlToUse=''
 	, onlineWorkers = 0
@@ -1251,25 +1251,25 @@ function reloadOnlyWorker() {
 	if (e.result)
 	e.result.forEach((function(e) {
 				e.name = encodeHTML(e.name)
-				, workerOffline = !e.online, workerOffline ? offlineWorkers++ : onlineWorkers++
+				, workerOffline = !e.isOnline, workerOffline ? offlineWorkers++ : onlineWorkers++
 				, classAdditions = ""
 				, workerOffline && (classAdditions += "red")
 				, htmldata = `<tr><td id="worker-${e.name}" onclick="renderStats('${e.name}');" sort-key="${e.name}" sort-type="str" class="mono ${classAdditions}"><div class="space-between"><span class="worker-name black-underline ${classAdditions}">${e.name}`
-				, e.same_name_count > 1 && (htmldata += `<span class="bluegray" style="margin-left: 5px;"> (${e.same_name_count})</span>`)
+				, e.count > 1 && (htmldata += `<span class="bluegray" style="margin-left: 5px;"> (${e.count})</span>`)
 				, htmldata += "</span>"
 				, htmldata += '</div></td><td class="mono '
 				, workerOffline && (htmldata += "bluegray")
-				, reportedSi = getSi(e.reported_hashrate)
-				, htmldata += `" sort-key="${e.reported_hashrate}" sort-type="int">${Math.round(e.reported_hashrate/reportedSi[0]*10)/10}<span class="bluegray">&nbsp;${reportedSi[1]}H/s</span></td><td class="mono `
-				, effectiveSi = getSi(e.effective_hashrate)
-				, lastSeen = Date.now() - 1e3 * e.last_seen
+				, reportedSi = getSi(e.reportedHashrate)
+				, htmldata += `" sort-key="${e.reportedHashrate}" sort-type="int">${Math.round(e.reportedHashrate/reportedSi[0]*10)/10}<span class="bluegray">&nbsp;${reportedSi[1]}H/s</span></td><td class="mono `
+				, effectiveSi = getSi(e.currentEffectiveHashrate)
+				, lastSeen = Date.now() - 1e3 * e.lastSeen
 				, lastSeen < 1e3 ? lastSeenHuman = "now" : lastSeenHuman = formatAgo(humanizeDuration(lastSeen, {
 					largest: 1,
 					language: LANGUAGE_CODE,
 					round: !0
 				}))
 				, workerOffline && (htmldata += "bluegray")
-				, totalShares = e.valid_shares + e.stale_shares + e.invalid_shares, htmldata += `" sort-key="${e.effective_hashrate}" sort-type="int">${Math.round(e.effective_hashrate/effectiveSi[0]*10)/10}<span class="bluegray">&nbsp;${effectiveSi[1]}H/s</span></td><td sort-key="${e.valid_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.valid_shares}</div><span class="bluegray">(${(e.valid_shares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.stale_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.stale_shares}</div><span class="bluegray">(${(e.stale_shares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.invalid_shares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.invalid_shares}</div><span class="bluegray">(${(e.invalid_shares/totalShares*100).toFixed(2)}%)</span></div></td><td id="last-seen-worker-${encodeHTML(e.name)}">${lastSeenHuman}</td></tr>`
+				, totalShares = e.validShares + e.staleShares + e.invalidShares, htmldata += `" sort-key="${e.currentEffectiveHashrate}" sort-type="int">${Math.round(e.currentEffectiveHashrate/effectiveSi[0]*10)/10}<span class="bluegray">&nbsp;${effectiveSi[1]}H/s</span></td><td sort-key="${e.validShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.validShares}</div><span class="bluegray">(${(e.validShares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.staleShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.staleShares}</div><span class="bluegray">(${(e.staleShares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.invalidShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.invalidShares}</div><span class="bluegray">(${(e.invalidShares/totalShares*100).toFixed(2)}%)</span></div></td><td id="last-seen-worker-${encodeHTML(e.name)}">${lastSeenHuman}</td></tr>`
 				,  htmlToUse = htmlToUse+htmldata//$("#rigstats-tbody").append(htmldata)
 			}))
             , $(".online-workers").html(onlineWorkers)
@@ -1372,6 +1372,7 @@ function loadEverything()
 			let htmlToUse=''
 			, onlineWorkers = 0
 			, offlineWorkers = 0;
+		        if (e.result)
 			e.result.forEach((function(e) {
 				e.name = encodeHTML(e.name)
 				, workerOffline = !e.isOnline, workerOffline ? offlineWorkers++ : onlineWorkers++
