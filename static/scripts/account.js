@@ -1303,7 +1303,7 @@ function loadEverything()
 	//,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/details`, success: function(r) {} })
 	
 	,	$.get("https://api.flexpool.io/v2/pool/averageBlockReward?coin=eth", {}, (function(l) {
-			$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
+			//$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
 		}))
 	,	$.get("https://api.flexpool.io/v2/pool/averageLuck?coin=eth", {}, (function(l) {
 			$("#avgluck").css("display", ""),
