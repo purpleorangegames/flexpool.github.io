@@ -1335,6 +1335,7 @@ function loadEverything()
 		}))
 	
 	,	$.get(`https://api.flexpool.io/v2/miner/stats?coin=eth&address=${window.wallet}`, {}, (function(e) {
+		        let valid_sharesP=0;let invalid_sharesP=0;
 			data = e.result,
 			effective_hashrate = sif(data.currentEffectiveHashrate),
 			average_effective = sif(data.averageEffectiveHashrate),
