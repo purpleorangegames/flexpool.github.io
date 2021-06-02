@@ -1300,15 +1300,13 @@ function loadEverything()
 	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/miner/roundShare?coin=eth&address=${window.wallet}`, success: function(r) {} })
 	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/pool/blocks?coin=eth&page=0`, success: function(r) {} })
 	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/pool/hashrate?coin=eth`, success: function(r) {} })
-	//,	$.ajax({type: 'GET', url: `https://old.flexpool.io/api/v1/miner/${window.wallet}/details`, success: function(r) {} })
+	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/miner/details?coin=eth&address=${window.wallet}`, success: function(r) {} })
 	
-	,	$.get("https://api.flexpool.io/v2/pool/averageBlockReward?coin=eth", {}, (function(l) {
-			//$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
-		}))
 	,	$.get("https://api.flexpool.io/v2/pool/averageLuck?coin=eth", {}, (function(l) {
 			$("#avgluck").css("display", ""),
 			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result,false)}</mark>%`),
 			$("#avgluck mark").attr("data-luck", l.result)
+			//$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
 		}))
 	,	$.get("https://api.flexpool.io/v2/pool/blockStatistics?coin=eth", {}, (function(l) {
 			$("#block-count").html(l.result.total.blocks + l.result.total.uncles + l.result.total.orphans)
@@ -1410,7 +1408,7 @@ function loadEverything()
 	,	walletRoundShare
 	,	blockPageZero
 	,	poolHashrate
-	//,	walletDetails
+	,	walletDetails
 	]) => {
 		//ethCurrentValue=window.ethPrice;
 	        ethCurrentValue=walletBalance.result.price;
@@ -1419,10 +1417,10 @@ function loadEverything()
 		let roundSharePercentage=walletRoundShare.result;
 		let lastBlockDifficulty=blockPageZero.result.data[0].difficulty;
 		let poolTotalHashrate=poolHashrate.result.total;
-		let minPayoutThreshold=0;//walletDetails.result.min_payout_threshold/1000000000000000000.0;
-		let firstJoined='';//walletDetails.result.first_joined;
+		let minPayoutThreshold=walletDetails.result.payoutLimit/1000000000000000000.0;
+		let firstJoined=walletDetails.result.firstJoined;
 		let poolDonation=0.5;//walletDetails.result.pool_donation;
-		let maxFeePrice=0;//walletDetails.result.max_fee_price;
+		let maxFeePrice=walletDetails.result.maxFeePrice;
 		
 		$("#currentGasSettings").html(maxFeePrice);
 		$(".class-currentGasSettings").html(maxFeePrice+" Gwei");
