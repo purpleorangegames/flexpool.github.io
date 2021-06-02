@@ -510,7 +510,7 @@ function render_payments(e) {
 
 function render_payments_chart() {
 	$.get(`https://api.flexpool.io/v2/miner/payments?coin=eth&address=${window.wallet}&page=0`, {}, (function(e) {
-		data = e.result;
+		data = e.result.data;
 		chart_data = [];
 		if (data)
 		 data.forEach((function(e, t) {
