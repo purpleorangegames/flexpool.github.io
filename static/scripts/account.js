@@ -1713,7 +1713,7 @@ function loadEverything()
 							if (t1.result.data[i].number>maxNumber) {
 								let tempDict={}
 								tempDict["timestamp"]=t1.result.data[i].timestamp
-								tempDict["total_rewards"]=t1.result.data[i].total_rewards
+								tempDict["total_rewards"]=t1.result.data[i].reward
 								tempDict["type"]=t1.result.data[i].type
 								tempDict["number"]=t1.result.data[i].number
 								tempDict["luck"]=t1.result.data[i].luck
