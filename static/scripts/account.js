@@ -455,32 +455,38 @@ function renderStats(e) {
 
 function renderHeader(e) {
 	url = "" == e ? `https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}` : `https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}&worker=${e}`, $.get(url, {}, (function(e) {
-		data = e.result, effective_hashrate = sif(data.currentEffectiveHashrate)
-			, average_effective = sif(data.averageEffectiveHashrate)
-			, reported_hashrate = sif(data.reportedHashrate)
-			, $("#effective_hashrate").html(`<mark class="big">${effective_hashrate[0]}</mark> ${effective_hashrate[1]}H/s`)
-			, $("#average_hashrate").html(`<mark class="big">${average_effective[0]}</mark> ${average_effective[1]}H/s`)
-			, $("#reported_hashrate").html(`<mark class="big">${reported_hashrate[0]}</mark> ${reported_hashrate[1]}H/s`)
-			, valid_shares = data.validShares
-			, stale_shares = data.staleShares
-			, invalid_shares = data.invalidShares
-			, $("#valid_shares").html(`<mark class="big">${valid_shares}</mark>`)
-			, $("#stale_shares").html(`<mark class="big">${stale_shares}</mark>`)
-			, $("#invalid_shares").html(`<mark class="big">${invalid_shares}</mark>`)
-			, total_shares = valid_shares + stale_shares + invalid_shares, total_shares > 0
-		        && (fdata = (valid_shares / total_shares * 100), isNaN(fdata) || $("#valid_shares_percentage").html(fdata.toFixed(2))
-			, fdata = (valid_shares / total_shares * 100), isNaN(fdata) || $("#valid_shares_percentage_big").html(fdata.toFixed(2))
-			, fdata = (stale_shares / total_shares * 100), isNaN(fdata) || $("#stale_shares_percentage").html(fdata.toFixed(2))
-			, fdata = (invalid_shares / total_shares * 100), isNaN(fdata) || $("#invalid_shares_percentage").html(fdata.toFixed(2)))
-			, $("#effective_hashrate2").html($("#effective_hashrate").html())
-			, $("#average_hashrate2").html($("#average_hashrate").html())
-			, $("#reported_hashrate2").html($("#reported_hashrate").html())
-			, $("#valid_shares2").html($("#valid_shares").html())
-			, $("#stale_shares2").html($("#stale_shares").html())
-			, $("#invalid_shares2").html($("#invalid_shares").html())
-			, $("#valid_shares_percentage2").html($("#valid_shares_percentage").html())
-			, $("#stale_shares_percentage2").html($("#stale_shares_percentage").html())
-			, $("#invalid_shares_percentage2").html($("#invalid_shares_percentage").html())
+
+		        let valid_sharesP=0;let invalid_sharesP=0;let stale_sharesP=0;
+			data = e.result,
+			effective_hashrate = sif(data.currentEffectiveHashrate),
+			average_effective = sif(data.averageEffectiveHashrate),
+			reported_hashrate = sif(data.reportedHashrate),
+			$("#effective_hashrate, #effective_hashrate2").html(`<mark class="big">${effective_hashrate[0]}</mark> ${effective_hashrate[1]}H/s`),
+			$(".class-effective_hashrate").html(`Current: ${effective_hashrate[0]} ${effective_hashrate[1]}H/s`),
+			$("#average_hashrate, #average_hashrate2").html(`<mark class="big">${average_effective[0]}</mark> ${average_effective[1]}H/s`),
+			$(".class-average_hashrate").html(`${average_effective[0]} ${average_effective[1]}H/s`),
+			$("#reported_hashrate, #reported_hashrate2").html(`<mark class="big">${reported_hashrate[0]}</mark> ${reported_hashrate[1]}H/s`),
+			$(".class-reported_hashrate").html(`Reported: ${reported_hashrate[0]} ${reported_hashrate[1]}H/s`),
+			valid_shares = data.validShares,
+			stale_shares = data.staleShares,
+			invalid_shares = data.invalidShares,
+			$("#valid_shares, #valid_shares2").html(`<mark class="big">${valid_shares}</mark>`),
+			$("#stale_shares, #stale_shares2").html(`<mark class="big">${stale_shares}</mark>`),
+			$("#invalid_shares, #invalid_shares2").html(`<mark class="big">${invalid_shares}</mark>`),
+			total_shares = valid_shares + stale_shares + invalid_shares,
+			total_shares > 0 && (fdata = Math.round(valid_shares / total_shares * 1e4) / 100,
+			
+			isNaN(fdata) || $("#valid_shares_percentage, #valid_shares_percentage2").html(fdata.toFixed(2)),
+			valid_sharesP = fdata = (valid_shares / total_shares * 100) ,
+			isNaN(fdata) || $("#valid_shares_percentage_big, #valid_shares_percentage_big2").html(fdata.toFixed(2)),
+			stale_sharesP = fdata = (stale_shares / total_shares * 100) ,
+			isNaN(fdata) || $("#stale_shares_percentage, #stale_shares_percentage2").html(fdata.toFixed(2)),
+			invalid_sharesP = fdata = (invalid_shares / total_shares * 100) ,
+			isNaN(fdata) || $("#invalid_shares_percentage, #invalid_shares_percentage2").html(fdata.toFixed(2))),
+			
+			$(".class-valid_shares").html(`${valid_shares}<span class="class-normal-gray-text valid_shares_percentage">&nbsp;Valid (${valid_sharesP.toFixed(2)}%)</span>`),
+			$(".class-stale-invalid-shares").html(`${stale_shares} Stale (${stale_sharesP.toFixed(2)}%) / ${invalid_shares} Invalid (${invalid_sharesP.toFixed(2)}%)</br>`)
+		
 	}))
 }
 
@@ -1429,105 +1435,6 @@ function loadEverything()
 	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/pool/blocks?coin=eth&page=0`, success: function(r) {} })
 	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/pool/hashrate?coin=eth`, success: function(r) {} })
 	,	$.ajax({type: 'GET', url: `https://api.flexpool.io/v2/miner/details?coin=eth&address=${window.wallet}`, success: function(r) {} })
-	/*
-	,	$.get("https://api.flexpool.io/v2/pool/averageLuck?coin=eth", {}, (function(l) {
-			$("#avgluck").css("display", ""),
-			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result,false)}</mark>%`),
-			$("#avgluck mark").attr("data-luck", l.result)
-			//$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
-		}))
-	,	$.get("https://api.flexpool.io/v2/pool/blockStatistics?coin=eth", {}, (function(l) {
-			$("#block-count").html(l.result.total.blocks + l.result.total.uncles + l.result.total.orphans)
-		}))
-	,	$.get(`https://api.flexpool.io/v2/pool/currentLuck?coin=eth`, {}, (function(t) {
-			$("#current-luck").html(`<span class="luck-value" data-luck="${t.result}">${formatLuck(t.result,/ *isPro* /false)}</span>%`);
-			$("#currentluck").css("display", "");
-			$("#currentluck").html(`<mark class="luck-value">${formatLuck(t.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(t.result,false)}</mark>%`);
-			$("#currentluck mark").attr("data-luck", t.result);
-		}))
-	,	$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=RC1BAJSDTF26J5D3VYHHSZC93XRFTDQKR2`, {}, (function(t) {
-			$("#gasPrices").html("")
-			let gasPrices="";
-			if (t.result.SafeGasPrice == undefined) {
-				$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=4P9URNA4GRJWYV45GW4XE4CZSTXUB41Y5V`, {}, (function(t) {
-					if (t.result.SafeGasPrice == undefined) {
-						$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=97P7K57FXX34M489NFZWWKKX4V8EF27RHW`, {}, (function(t) {
-							if (t.result.SafeGasPrice == undefined) {} else gasPrices=t.result.SafeGasPrice + " / " + t.result.ProposeGasPrice + " / " + t.result.FastGasPrice;
-						}));
-					} else gasPrices=t.result.SafeGasPrice + " / " + t.result.ProposeGasPrice + " / " + t.result.FastGasPrice;
-				}));
-			} else gasPrices=t.result.SafeGasPrice + " / " + t.result.ProposeGasPrice + " / " + t.result.FastGasPrice;
-			$("#gasPrices").html(gasPrices);
-			$(".class-gasPrices").html("Gas Prices: "+gasPrices);
-		}))
-	
-	,	$.get(`https://api.flexpool.io/v2/miner/stats?coin=eth&address=${window.wallet}`, {}, (function(e) {
-		        let valid_sharesP=0;let invalid_sharesP=0;let stale_sharesP=0;
-			data = e.result,
-			effective_hashrate = sif(data.currentEffectiveHashrate),
-			average_effective = sif(data.averageEffectiveHashrate),
-			reported_hashrate = sif(data.reportedHashrate),
-			$("#effective_hashrate, #effective_hashrate2").html(`<mark class="big">${effective_hashrate[0]}</mark> ${effective_hashrate[1]}H/s`),
-			$(".class-effective_hashrate").html(`Current: ${effective_hashrate[0]} ${effective_hashrate[1]}H/s`),
-			$("#average_hashrate, #average_hashrate2").html(`<mark class="big">${average_effective[0]}</mark> ${average_effective[1]}H/s`),
-			$(".class-average_hashrate").html(`${average_effective[0]} ${average_effective[1]}H/s`),
-			$("#reported_hashrate, #reported_hashrate2").html(`<mark class="big">${reported_hashrate[0]}</mark> ${reported_hashrate[1]}H/s`),
-			$(".class-reported_hashrate").html(`Reported: ${reported_hashrate[0]} ${reported_hashrate[1]}H/s`),
-			valid_shares = data.validShares,
-			stale_shares = data.staleShares,
-			invalid_shares = data.invalidShares,
-			$("#valid_shares, #valid_shares2").html(`<mark class="big">${valid_shares}</mark>`),
-			$("#stale_shares, #stale_shares2").html(`<mark class="big">${stale_shares}</mark>`),
-			$("#invalid_shares, #invalid_shares2").html(`<mark class="big">${invalid_shares}</mark>`),
-			total_shares = valid_shares + stale_shares + invalid_shares,
-			total_shares > 0 && (fdata = Math.round(valid_shares / total_shares * 1e4) / 100,
-			
-			isNaN(fdata) || $("#valid_shares_percentage, #valid_shares_percentage2").html(fdata.toFixed(2)),
-			valid_sharesP = fdata = (valid_shares / total_shares * 100) ,
-			isNaN(fdata) || $("#valid_shares_percentage_big, #valid_shares_percentage_big2").html(fdata.toFixed(2)),
-			stale_sharesP = fdata = (stale_shares / total_shares * 100) ,
-			isNaN(fdata) || $("#stale_shares_percentage, #stale_shares_percentage2").html(fdata.toFixed(2)),
-			invalid_sharesP = fdata = (invalid_shares / total_shares * 100) ,
-			isNaN(fdata) || $("#invalid_shares_percentage, #invalid_shares_percentage2").html(fdata.toFixed(2))),
-			
-			$(".class-valid_shares").html(`${valid_shares}<span class="class-normal-gray-text valid_shares_percentage">&nbsp;Valid (${valid_sharesP.toFixed(2)}%)</span>`),
-			$(".class-stale-invalid-shares").html(`${stale_shares} Stale (${stale_sharesP.toFixed(2)}%) / ${invalid_shares} Invalid (${invalid_sharesP.toFixed(2)}%)</br>`)
-		}))
-	
-	,   $.get(`https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}`, {}, (function(e) {
-			let htmlToUse=''
-			, onlineWorkers = 0
-			, offlineWorkers = 0;
-		        if (e.result)
-			e.result.forEach((function(e) {
-				e.name = encodeHTML(e.name)
-				, workerOffline = !e.isOnline, workerOffline ? offlineWorkers++ : onlineWorkers++
-				, classAdditions = ""
-				, workerOffline && (classAdditions += "red")
-				, htmldata = `<tr><td id="worker-${e.name}" onclick="renderStats('${e.name}');" sort-key="${e.name}" sort-type="str" class="mono ${classAdditions}"><div class="space-between"><span class="worker-name black-underline ${classAdditions}">${e.name}`
-				, e.count > 1 && (htmldata += `<span class="bluegray" style="margin-left: 5px;"> (${e.count})</span>`)
-				, htmldata += "</span>"
-				, htmldata += '</div></td><td class="mono '
-				, workerOffline && (htmldata += "bluegray")
-				, reportedSi = getSi(e.reportedHashrate)
-				, htmldata += `" sort-key="${e.reportedHashrate}" sort-type="int">${Math.round(e.reportedHashrate/reportedSi[0]*10)/10}<span class="bluegray">&nbsp;${reportedSi[1]}H/s</span></td><td class="mono `
-				, effectiveSi = getSi(e.currentEffectiveHashrate)
-				, lastSeen = Date.now() - 1e3 * e.lastSeen
-				, lastSeen < 1e3 ? lastSeenHuman = "now" : lastSeenHuman = formatAgo(humanizeDuration(lastSeen, {
-					largest: 1,
-					language: LANGUAGE_CODE,
-					round: !0
-				}))
-				, workerOffline && (htmldata += "bluegray")
-				, totalShares = e.validShares + e.staleShares + e.invalidShares, htmldata += `" sort-key="${e.currentEffectiveHashrate}" sort-type="int">${Math.round(e.currentEffectiveHashrate/effectiveSi[0]*10)/10}<span class="bluegray">&nbsp;${effectiveSi[1]}H/s</span></td><td sort-key="${e.validShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.validShares}</div><span class="bluegray">(${(e.validShares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.staleShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.staleShares}</div><span class="bluegray">(${(e.staleShares/totalShares*100).toFixed(2)}%)</span></div></td><td sort-key="${e.invalidShares}" sort-type="int" class="mono"><div class="shares-item"><div>${e.invalidShares}</div><span class="bluegray">(${(e.invalidShares/totalShares*100).toFixed(2)}%)</span></div></td><td id="last-seen-worker-${encodeHTML(e.name)}">${lastSeenHuman}</td></tr>`
-				,  htmlToUse = htmlToUse+htmldata//$("#rigstats-tbody").append(htmldata)
-			}))
-            , $(".online-workers").html(onlineWorkers)
-            , $(".offline-workers").html(offlineWorkers)
-            , $("#rigstats-tbody").html(htmlToUse)
-			, $(".class-online-offline-workers").html(onlineWorkers+'/<span class="class-alternative-text-color">'+offlineWorkers+'</span>')
-		}))
-		*/
 	])
 	.then(([
 	//	ethCurrentValue
