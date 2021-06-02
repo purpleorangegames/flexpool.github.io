@@ -453,7 +453,7 @@ function renderStats(e) {
 	}))
 }
 
-function renderHeader(e) {
+function renderHeader(e) { /*
 	url = "" == e ? `https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}` : `https://api.flexpool.io/v2/miner/workers?coin=eth&address=${window.wallet}&worker=${e}`, $.get(url, {}, (function(e) {
 
 		        let valid_sharesP=0;let invalid_sharesP=0;let stale_sharesP=0;
@@ -487,7 +487,7 @@ function renderHeader(e) {
 			$(".class-valid_shares").html(`${valid_shares}<span class="class-normal-gray-text valid_shares_percentage">&nbsp;Valid (${valid_sharesP.toFixed(2)}%)</span>`),
 			$(".class-stale-invalid-shares").html(`${stale_shares} Stale (${stale_sharesP.toFixed(2)}%) / ${invalid_shares} Invalid (${invalid_sharesP.toFixed(2)}%)</br>`)
 		
-	}))
+	}))*/
 }
 
 function renderPaymentsData(e) {
