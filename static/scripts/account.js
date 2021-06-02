@@ -491,7 +491,7 @@ function renderHeader(e) { /*
 }
 
 function renderPaymentsData(e) {
-	$.get(`https://api.flexpool.io/v2/miner/paymentsStats?coin=eth&address=${window.wallet}`, {}, (function(t) { if (result.stats) {
+	$.get(`https://api.flexpool.io/v2/miner/paymentsStats?coin=eth&address=${window.wallet}`, {}, (function(t) { if (t.result.stats) {
 		totalPaid = t.result.stats.totalPaid / Math.pow(10, 18), $(".total-paid").html( /*Math.round*/ ((100 * totalPaid) / 100).toFixed(4)), $(".total-paid-usd").html(formatMoney(totalPaid * e))
 	//})).fail((function(e) {
 	//	console.error("Unable to get total paid", e)
@@ -510,9 +510,12 @@ function render_payments(e) {
 
 function render_payments_chart() {
 	$.get(`https://api.flexpool.io/v2/miner/payments?coin=eth&address=${window.wallet}&page=0`, {}, (function(e) {
-		data = e.result, chart_data = [], data.forEach((function(e, t) {
+		data = e.result;
+		chart_data = [];
+		if (data)
+		 data.forEach((function(e, t) {
 			chart_data.push([1e3 * e.timestamp, (e.value-e.fee) / Math.pow(10, 18)])
-		})), chart_data.reverse(), renderPayoutChart(chart_data)
+		 })), chart_data.reverse(), renderPayoutChart(chart_data);
 	}))
 }
 
