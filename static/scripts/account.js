@@ -495,8 +495,8 @@ function renderPaymentsData(e) {
 	//	console.error("Unable to get total donated", e)
 	//})), $.get(`https://old.flexpool.io/api/v1/miner/${window.wallet}/paymentCount`, {}, (function(e) {
 		$(".total-payouts").html(t.result.stats.transactionCount)
-	}))
-} }
+	} }))
+} 
 
 function render_payments(e) {
 	renderPagedTable("payments", "https://old.flexpool.io/api/v1/miner/" + window.wallet + "/payments", {}, e, "render_payments", paymentsTableDataFilter)
