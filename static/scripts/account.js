@@ -1457,7 +1457,7 @@ function loadEverything()
 		let poolTotalHashrate=poolHashrate.result.total;
 		let minPayoutThreshold=walletDetails.result.payoutLimit/1000000000000000000.0;
 		let firstJoined=walletDetails.result.firstJoined;
-		let poolDonation=0.5;//walletDetails.result.pool_donation;
+		let poolDonation=0.005;//walletDetails.result.pool_donation;
 		let maxFeePrice=walletDetails.result.maxFeePrice;
 		
 		$("#currentGasSettings").html(maxFeePrice);
