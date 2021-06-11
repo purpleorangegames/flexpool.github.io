@@ -1451,7 +1451,9 @@ function loadEverything()
 	]) => {
 		//ethCurrentValue=window.ethPrice;
 	        ethCurrentValue=walletBalance.result.price;
-		let totalPaidUntreated=walletTotalPaid.result.stats.totalPaid;
+		let totalPaidUntreated=0
+		if (walletTotalPaid.result && walletTotalPaid.result.stats)
+		 totalPaidUntreated=walletTotalPaid.result.stats.totalPaid;
 		let currentBalanceUntreated=walletBalance.result.balance;
 		let roundSharePercentage=walletRoundShare.result;
 		let lastBlockDifficulty=blockPageZero.result.data[0].difficulty;
