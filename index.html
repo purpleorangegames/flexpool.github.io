@@ -1076,22 +1076,22 @@ $('#default-reward-selector').removeClass('selector-selected'); render_rewards_a
 		<script src="/static/scripts/account.js">
 		</script> 
 		<script>
-let fileToLoad='/static/historicData/'+window.wallet+'.js';
+/*let fileToLoad='/static/historicData/'+window.wallet+'.js';
 $.ajax({
     url:fileToLoad,
     type:'HEAD',
     async: false,
     error: function()
-    {
+    {*/
 /*$('#rewards-chart').html("<div style='margin: auto; width: 80%; padding-top: 20px; '>If you want your data to be displayed here I will need your consent to scrape from flexpool site. I advise sending me an anonymous email with your wallet, like 10 minute email or guerrillamail. <br> <br> https://www.guerrillamail.com/compose <br> <br> My email is tiag.occ0 at gmail dot com <br> The subject should be ENTER <br> In the message put your WALLET (Remeber, it is case sensitive)<br> To stop being scraped just send me the email with OUT as subject and WALLET inside. <br> <br> You may send me your wallet by pm too, if you want.</div>")*/
 $('#rewards-chart').html("<div style='margin: auto; width: 80%; padding-top: 20px; '>I will need to redo this part of the code later to the V2 of the API, so I will no longer scrape data from the site as the block share is available in the new API.</div>")
-    },
+ /*   },
     success: function()
     {
 	if (typeof minerHistoricData === 'undefined')    
 		load_js(fileToLoad)
     }
-});     
+});     */
 		</script>
 		<script>
 		var cookieTheme=document.cookie.split("theme='")
