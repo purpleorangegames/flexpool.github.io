@@ -538,7 +538,7 @@ function render_rewards_api2_chart() {
 	}));
 }
 
-function render_rewards_table_page(page) {
+function render_rewards_table_page(page) { /*
 	let fileToLoad='/static/historicData/'+window.wallet+'.js';
 $.ajax({
     url:fileToLoad,
@@ -595,10 +595,11 @@ $.ajax({
 
     }
 });
-	
+	*/
 }
 
 function render_rewards_chart() {
+	/*
 	let fileToLoad='/static/historicData/'+window.wallet+'.js';
 $.ajax({
     url:fileToLoad,
@@ -686,7 +687,7 @@ $.ajax({
     }
 });
 
-	
+	*/
 }
 
 function renderBlocksData() {
