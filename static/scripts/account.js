@@ -1330,8 +1330,9 @@ function loadEverything()
 {
 	    Promise.all([
 		$.get("https://api.flexpool.io/v2/pool/averageLuck?coin=eth", {}, (function(l) {
+			luck = (100 / formatLuck(l.result,false)) ;
 			$("#avgluck").css("display", ""),
-			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(l.result,false)}</mark>%`),
+			$("#avgluck").html(`<mark class="luck-value">${formatLuck(l.result,false)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(luck,false)}</mark>%`),
 			$("#avgluck mark").attr("data-luck", l.result)
 			//$("#avgroundtime").html(humanizeDuration(1e3 * l.result, { largest: 1, language: LANGUAGE_CODE }))
 		}))
@@ -1339,9 +1340,10 @@ function loadEverything()
 			$("#block-count").html(l.result.total.blocks + l.result.total.uncles + l.result.total.orphans)
 		}))
 	,	$.get(`https://api.flexpool.io/v2/pool/currentLuck?coin=eth`, {}, (function(t) {
+			luck = (100 / formatLuck(t.result,false)) ;
 			$("#current-luck").html(`<span class="luck-value" data-luck="${t.result}">${formatLuck(t.result,/*isPro*/false)}</span>%`);
 			$("#currentluck").css("display", "");
-			$("#currentluck").html(`<mark class="luck-value">${formatLuck(t.result,true)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(t.result,false)}</mark>%`);
+			$("#currentluck").html(`<mark class="luck-value">${formatLuck(t.result,false)}</mark>% <mark class="luck-value" style="color:var(--luck-color);padding-left: 10px;">${formatLuck(luck,false)}</mark>%`);
 			$("#currentluck mark").attr("data-luck", t.result);
 		}))
 	,	$.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=RC1BAJSDTF26J5D3VYHHSZC93XRFTDQKR2`, {}, (function(t) {
@@ -1661,8 +1663,8 @@ function loadEverything()
 			if (currentDay == day && lastBlocksArray[i]['type'] == "uncle") countTodayUncle = countTodayUncle + 1;
 			if (hours < 24) {
 				count24 = count24 + 1;
-				effort = effort + formatLuck(lastBlocksArray[i]['luck'], true);
-				luck = luck + formatLuck(lastBlocksArray[i]['luck'], false);
+				effort = effort + formatLuck(lastBlocksArray[i]['luck'], false);//v2
+				//luck = luck + formatLuck(lastBlocksArray[i]['luck'], false);
 				reward24 = reward24 + (Math.round(lastBlocksArray[i]['total_rewards'] / Math.pow(10, 18) * 100) / 100);
 			}
 			if (hours < 24 && lastBlocksArray[i]['type'] == "uncle") {
